@@ -1,158 +1,159 @@
 /**
  * @file sidepanel.js
  * @description Script for the Link Peeker extension's settings panel.
- * Handles loading and saving of user settings, and applying themes and translations.
  */
 console.log("Link Peeker side panel script loaded.");
 
-// --- Manual Translation Dictionary ---
-const translations = {
-  en: {
-    settingsTitle: "Link Peeker Settings",
-    triggerKeyLabel: "Trigger Key",
-    triggerKeyAlt: "Alt + Click",
-    triggerKeyCtrl: "Ctrl + Click",
-    triggerKeyShift: "Shift + Click",
-    themeLabel: "Theme",
-    themeAuto: "Auto (Sync with OS)",
-    themeLight: "Light",
-    themeDark: "Dark",
-    languageLabel: "Language",
-    langEn: "English",
-    langZhCn: "简体中文",
-    langZhTw: "繁體中文",
-  },
-  zh_CN: {
-    settingsTitle: "Link Peeker 设置",
-    triggerKeyLabel: "触发键",
-    triggerKeyAlt: "Alt + 点击",
-    triggerKeyCtrl: "Ctrl + 点击",
-    triggerKeyShift: "Shift + 点击",
-    themeLabel: "主题",
-    themeAuto: "自动 (与操作系统同步)",
-    themeLight: "亮色",
-    themeDark: "暗色",
-    languageLabel: "语言",
-    langEn: "English",
-    langZhCn: "简体中文",
-    langZhTw: "繁體中文",
-  },
-  zh_TW: {
-    settingsTitle: "Link Peeker 設定",
-    triggerKeyLabel: "觸發鍵",
-    triggerKeyAlt: "Alt + 點擊",
-    triggerKeyCtrl: "Ctrl + 點擊",
-    triggerKeyShift: "Shift + 點擊",
-    themeLabel: "主題",
-    themeAuto: "自動 (與作業系統同步)",
-    themeLight: "亮色",
-    themeDark: "暗色",
-    languageLabel: "語言",
-    langEn: "English",
-    langZhCn: "简体中文",
-    langZhTw: "繁體中文",
-  },
-};
-
-// --- Settings Store ---
-const settings = {
+const defaultSettings = {
   triggerKey: "Alt",
-  theme: "auto",
+  theme: "inverse",
   language: "en",
+  referrerPolicy: "strict-origin-when-cross-origin",
+  sandbox: {
+    "allow-forms": true,
+    "allow-modals": true,
+    "allow-orientation-lock": false,
+    "allow-pointer-lock": false,
+    "allow-popups": true,
+    "allow-popups-to-escape-sandbox": false,
+    "allow-presentation": true,
+    "allow-same-origin": true,
+    "allow-scripts": true,
+    "allow-top-navigation": false,
+    "allow-top-navigation-by-user-activation": true,
+    "allow-downloads": true,
+    "allow-downloads-without-user-activation": false,
+    "allow-storage-access-by-user-activation": true,
+  },
+  allow: {
+    autoplay: true,
+    camera: false,
+    "clipboard-write": false,
+    "display-capture": false,
+    "encrypted-media": true,
+    fullscreen: true,
+    geolocation: false,
+    microphone: false,
+    payment: false,
+    "screen-wake-lock": false,
+    "web-share": true,
+  },
 };
 
-/**
- * Saves settings to chrome.storage.sync.
- * @param {object} newSettings - An object containing the settings to save.
- */
+let currentSettings = {};
+
 function saveSettings(newSettings) {
   chrome.storage.sync.set(newSettings, () => {
     console.log("Settings saved:", newSettings);
   });
 }
 
-/**
- * Loads settings from chrome.storage.sync.
- * @param {function} callback - A function to be called with the loaded settings.
- */
 function loadSettings(callback) {
-  chrome.storage.sync.get(settings, (items) => {
+  chrome.storage.sync.get(defaultSettings, (items) => {
+    currentSettings = items;
     console.log("Settings loaded:", items);
-    if (callback) {
-      callback(items);
-    }
+    if (callback) callback(items);
   });
 }
 
-/**
- * Applies translations manually based on the selected language.
- * @param {string} lang - The language code ('en' or 'zh_TW').
- */
-function applyTranslations(lang) {
-  const dict = translations[lang] || translations.en;
-  document.getElementById("settingsTitle").innerText = dict.settingsTitle;
-  document.getElementById("triggerKeyLabel").innerText = dict.triggerKeyLabel;
-  document.querySelector('option[value="Alt"]').innerText = dict.triggerKeyAlt;
-  document.querySelector('option[value="Ctrl"]').innerText =
-    dict.triggerKeyCtrl;
-  document.querySelector('option[value="Shift"]').innerText =
-    dict.triggerKeyShift;
-  document.getElementById("themeLabel").innerText = dict.themeLabel;
-  document.querySelector('option[value="auto"]').innerText = dict.themeAuto;
-  document.querySelector('option[value="light"]').innerText = dict.themeLight;
-  document.querySelector('option[value="dark"]').innerText = dict.themeDark;
-  document.getElementById("languageLabel").innerText = dict.languageLabel;
-  document.querySelector('option[value="en"]').innerText = dict.langEn;
-  document.querySelector('option[value="zh_CN"]').innerText = dict.langZhCn;
-  document.querySelector('option[value="zh_TW"]').innerText = dict.langZhTw;
+function applyTranslations() {
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.innerText = chrome.i18n.getMessage(el.dataset.i18n) || el.dataset.i18n;
+  });
+  document.title = chrome.i18n.getMessage("settingsTitle");
+}
+
+function applyPanelTheme(theme) {
+  let themeToApply =
+    theme === "auto"
+      ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+      : theme;
+
+  document.documentElement.style.filter =
+    themeToApply === "inverse" ? "invert(1)" : "none";
+  if (themeToApply === "inverse") {
+    themeToApply = window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
+  document.documentElement.setAttribute("data-theme", themeToApply);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const triggerKeySelect = document.getElementById("triggerKey");
-  const themeSelect = document.getElementById("theme");
-  const languageSelect = document.getElementById("language");
+  const elements = {
+    triggerKey: document.getElementById("triggerKey"),
+    theme: document.getElementById("theme"),
+    language: document.getElementById("language"),
+    sandboxOptions: document.getElementById("sandbox-options"),
+    allowOptions: document.getElementById("allow-options"),
+    referrerPolicyOptions: document.getElementById("referrer-policy-options"),
+  };
 
-  /**
-   * Applies the selected theme (light, dark, or auto) to the document.
-   * @param {string} theme - The theme to apply ('light', 'dark', or 'auto').
-   */
-  function applyTheme(theme) {
-    if (theme === "auto") {
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      document.documentElement.setAttribute(
-        "data-theme",
-        prefersDark ? "dark" : "light"
+  applyTranslations();
+
+  loadSettings((settings) => {
+    applyPanelTheme(settings.theme);
+
+    elements.triggerKey.value = settings.triggerKey;
+    elements.theme.value = settings.theme;
+    elements.language.value = settings.language;
+
+    Object.keys(settings.sandbox).forEach((key) => {
+      const checkbox = elements.sandboxOptions.querySelector(
+        `[data-key="${key}"]`
       );
-    } else {
-      document.documentElement.setAttribute("data-theme", theme);
+      if (checkbox) checkbox.checked = settings.sandbox[key];
+    });
+
+    Object.keys(settings.allow).forEach((key) => {
+      const checkbox = elements.allowOptions.querySelector(
+        `[data-key="${key}"]`
+      );
+      if (checkbox) checkbox.checked = settings.allow[key];
+    });
+
+    const radio = elements.referrerPolicyOptions.querySelector(
+      `[value="${settings.referrerPolicy}"]`
+    );
+    if (radio) radio.checked = true;
+  });
+
+  elements.triggerKey.addEventListener("change", (e) =>
+    saveSettings({ triggerKey: e.target.value })
+  );
+  elements.theme.addEventListener("change", (e) => {
+    saveSettings({ theme: e.target.value });
+    applyPanelTheme(e.target.value);
+  });
+  elements.language.addEventListener("change", () => window.location.reload());
+
+  elements.sandboxOptions.addEventListener("change", (e) => {
+    if (e.target.matches('input[type="checkbox"]')) {
+      const newSandboxSettings = {
+        ...currentSettings.sandbox,
+        [e.target.dataset.key]: e.target.checked,
+      };
+      currentSettings.sandbox = newSandboxSettings;
+      saveSettings({ sandbox: newSandboxSettings });
     }
-  }
-
-  // Load settings and populate UI
-  loadSettings((loadedSettings) => {
-    applyTranslations(loadedSettings.language);
-    triggerKeySelect.value = loadedSettings.triggerKey;
-    themeSelect.value = loadedSettings.theme;
-    languageSelect.value = loadedSettings.language;
-    applyTheme(loadedSettings.theme);
   });
 
-  // Add event listeners to save changes
-  triggerKeySelect.addEventListener("change", () => {
-    saveSettings({ triggerKey: triggerKeySelect.value });
+  elements.allowOptions.addEventListener("change", (e) => {
+    if (e.target.matches('input[type="checkbox"]')) {
+      const newAllowSettings = {
+        ...currentSettings.allow,
+        [e.target.dataset.key]: e.target.checked,
+      };
+      currentSettings.allow = newAllowSettings;
+      saveSettings({ allow: newAllowSettings });
+    }
   });
 
-  themeSelect.addEventListener("change", () => {
-    const newTheme = themeSelect.value;
-    saveSettings({ theme: newTheme });
-    applyTheme(newTheme);
-  });
-
-  languageSelect.addEventListener("change", () => {
-    const newLang = languageSelect.value;
-    saveSettings({ language: newLang });
-    applyTranslations(newLang);
+  elements.referrerPolicyOptions.addEventListener("change", (e) => {
+    if (e.target.matches('input[type="radio"]')) {
+      saveSettings({ referrerPolicy: e.target.value });
+    }
   });
 });

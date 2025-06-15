@@ -21,15 +21,17 @@ Link Peeker is a powerful Chromium extension designed to boost your browsing pro
 ## Features
 
 - **Full Webpage Preview:** Instead of just metadata, Link Peeker loads the complete, interactive webpage inside a sandboxed `<iframe>`.
-- **Immersive UI:** The preview window appears centered on the screen with a semi-transparent overlay, and the original page is "tombstoned" (made non-interactive) to focus your attention.
-- **Floating Controls:** The "Open in New Tab" and "Close" controls are rendered as a sleek, vertical toolbar attached to the left side of the preview window, featuring a modern frosted glass effect (`backdrop-filter`).
+- **Immersive UI:** The preview window appears centered on the screen with a semi-transparent, frosted-glass effect overlay.
+- **Dynamic Theming:**
+  - **Light & Dark Modes:** Clean, modern light and dark themes for the preview window.
+  - **Inverse Mode (Negative Effect):** A unique theme that inverts the colors of the previewed `<iframe>`, creating a "negative" effect that's useful for quick content scanning or accessibility.
 - **Fluid Animations:** Powered by GSAP for smooth, high-performance animations for the window, overlay, and loading indicators.
-- **Style Encapsulation:** Uses Shadow DOM to prevent any style conflicts with the host page.
-- **Customizable Settings:** A dedicated side panel allows you to configure:
-  - Trigger Key (`Alt`, `Ctrl`, `Shift`)
-  - Theme (Light, Dark, or Auto-sync with OS)
-  - Language
-- **Multi-language Support:** Ships with English, Traditional Chinese (`zh_TW`), and Simplified Chinese (`zh_CN`).
+- **Comprehensive Security Configuration:** A dedicated side panel allows you to configure:
+  - **Trigger Key:** `Alt`, `Ctrl`, or `Shift`.
+  - **Language:** English, Traditional Chinese (`zh_TW`), and Simplified Chinese (`zh_CN`).
+  - **Sandbox Permissions:** Fine-tune the `<iframe>`'s core security restrictions with over 10 standard flags.
+  - **Feature Policy (Allow List):** Grant specific high-level API access (like `fullscreen`, `payment`, or `camera`) to the previewed page.
+  - **Referrer Policy:** Choose from 8 different policies to control how much referrer information is sent.
 - **Modern & Secure:** Built with Manifest V3 and `declarativeNetRequest` to bypass `X-Frame-Options` and other anti-embedding headers securely.
 
 ## Installation Guide
@@ -55,16 +57,15 @@ This project does not require any build steps or dependencies. You can load it d
 - **Interact with Preview:** You can scroll and interact with the webpage inside the preview window.
 - **Use Controls:** Click the floating buttons on the left to open the link in a new tab or close the preview.
 - **Close Preview:** You can also close the preview by clicking the dark overlay.
-- **Access Settings:** Open your browser's side panel and select "Link Peeker" to access the settings page.
+- **Access Settings:** Open your browser's side panel and select "Link Peeker" to configure trigger keys, themes, language, and detailed security settings.
 
 ## Glossary
 
 - **Manifest V3:** The current standard for Chrome extensions, focusing on improved security, performance, and privacy.
-- **Content Script (`content.js`):** A script injected directly into webpages. It can read and manipulate the DOM of the page and is responsible for creating the preview UI and detecting user interactions.
 - **declarativeNetRequest:** A Manifest V3 API that allows extensions to modify network requests declaratively, used here to remove anti-framing headers.
 - **Shadow DOM:** A web standard used for CSS encapsulation. It creates a "shadow root" for an element, isolating its styles and structure from the main document's DOM.
-- **sandbox (iframe attribute):** A security feature that applies a set of restrictions to the content within an `<iframe>`. We use `allow-same-origin` as a necessary trade-off to let modern web apps function.
-- **Tombstone Mechanism:** A term used here to describe making the background page non-interactive (by preventing scrolling) while the preview is active.
+- **sandbox (iframe attribute):** A security feature that applies a set of restrictions to the content within an `<iframe>`. Link Peeker provides a comprehensive settings panel to let you configure these permissions.
+- **allow (iframe attribute):** A Feature Policy mechanism that allows you to selectively enable specific browser features (like fullscreen, payment processing, etc.) within the `<iframe>`.
 
 ## Contributing
 

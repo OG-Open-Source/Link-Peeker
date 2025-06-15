@@ -1,70 +1,158 @@
 {
   "extensionName": {
-    "message": "Link Peeker",
-    "description": "The name of the extension."
+    "message": "Link Peeker"
   },
   "extensionDescription": {
-    "message": "Preview links without leaving your current page.",
-    "description": "The description of the extension."
+    "message": "Preview links without leaving your current page."
   },
   "settingsTitle": {
-    "message": "Link Peeker Settings",
-    "description": "Title for the settings page."
+    "message": "Link Peeker Settings"
   },
   "triggerKeyLabel": {
-    "message": "Trigger Key",
-    "description": "Label for the trigger key setting."
+    "message": "Trigger Key"
   },
   "triggerKeyAlt": {
-    "message": "Alt + Click",
-    "description": "Alt + Click option."
+    "message": "Alt + Click"
   },
   "triggerKeyCtrl": {
-    "message": "Ctrl + Click",
-    "description": "Ctrl + Click option."
+    "message": "Ctrl + Click"
   },
   "triggerKeyShift": {
-    "message": "Shift + Click",
-    "description": "Shift + Click option."
+    "message": "Shift + Click"
   },
   "themeLabel": {
-    "message": "Theme",
-    "description": "Label for the theme setting."
-  },
-  "languageLabel": {
-    "message": "Language",
-    "description": "Label for the language setting."
-  },
-  "themeAuto": {
-    "message": "Auto (Sync with OS)",
-    "description": "Auto theme option."
+    "message": "Theme"
   },
   "themeLight": {
-    "message": "Light",
-    "description": "Light theme option."
+    "message": "Light"
   },
   "themeDark": {
-    "message": "Dark",
-    "description": "Dark theme option."
+    "message": "Dark"
+  },
+  "themeInverse": {
+    "message": "Inverse"
+  },
+  "languageLabel": {
+    "message": "Language"
   },
   "langEn": {
-    "message": "English",
-    "description": "English language option."
+    "message": "English"
+  },
+  "langZhCn": {
+    "message": "简体中文"
   },
   "langZhTw": {
-    "message": "繁體中文",
-    "description": "Traditional Chinese language option."
+    "message": "繁體中文"
   },
-  "loadingText": {
-    "message": "Loading...",
-    "description": "Text shown while preview is loading."
+  "iframeConfigTitle": {
+    "message": "Iframe Configuration"
   },
-  "openInNewTabText": {
-    "message": "Open in New Tab",
-    "description": "Button text to open link in a new tab."
+  "sandboxLabel": {
+    "message": "Sandbox Permissions"
   },
-  "closeButtonText": {
-    "message": "Close",
-    "description": "Button text to close the preview."
+  "sb_allow_forms": {
+    "message": "Allow Forms"
+  },
+  "sb_allow_modals": {
+    "message": "Allow Modals"
+  },
+  "sb_allow_orientation_lock": {
+    "message": "Allow Orientation Lock"
+  },
+  "sb_allow_pointer_lock": {
+    "message": "Allow Pointer Lock"
+  },
+  "sb_allow_popups": {
+    "message": "Allow Popups"
+  },
+  "sb_allow_popups_to_escape_sandbox": {
+    "message": "Allow Popups to Escape Sandbox"
+  },
+  "sb_allow_presentation": {
+    "message": "Allow Presentation"
+  },
+  "sb_allow_same_origin": {
+    "message": "Allow Same-Origin"
+  },
+  "sb_allow_scripts": {
+    "message": "Allow Scripts"
+  },
+  "sb_allow_top_navigation": {
+    "message": "Allow Top Navigation"
+  },
+  "sb_allow_top_navigation_by_user_activation": {
+    "message": "Allow Top Navigation by User Activation"
+  },
+  "sb_allow_downloads": {
+    "message": "Allow Downloads"
+  },
+  "sb_allow_downloads_without_user_activation": {
+    "message": "Allow Downloads without User Activation"
+  },
+  "sb_allow_storage_access_by_user_activation": {
+    "message": "Allow Storage Access by User Activation"
+  },
+  "featurePolicyLabel": {
+    "message": "Feature Policy (Allow List)"
+  },
+  "fp_autoplay": {
+    "message": "Autoplay"
+  },
+  "fp_camera": {
+    "message": "Camera"
+  },
+  "fp_clipboard_write": {
+    "message": "Clipboard Write"
+  },
+  "fp_display_capture": {
+    "message": "Display Capture"
+  },
+  "fp_encrypted_media": {
+    "message": "Encrypted Media"
+  },
+  "fp_fullscreen": {
+    "message": "Fullscreen"
+  },
+  "fp_geolocation": {
+    "message": "Geolocation"
+  },
+  "fp_microphone": {
+    "message": "Microphone"
+  },
+  "fp_payment": {
+    "message": "Payment"
+  },
+  "fp_screen_wake_lock": {
+    "message": "Screen Wake Lock"
+  },
+  "fp_web_share": {
+    "message": "Web Share"
+  },
+  "referrerPolicyLabel": {
+    "message": "Referrer Policy"
+  },
+  "rp_no_referrer": {
+    "message": "No Referrer"
+  },
+  "rp_no_referrer_when_downgrade": {
+    "message": "No Referrer When Downgrade"
+  },
+  "rp_origin": {
+    "message": "Origin"
+  },
+  "rp_origin_when_cross_origin": {
+    "message": "Origin When Cross-Origin"
+  },
+  "rp_same_origin": {
+    "message": "Same Origin"
+  },
+  "rp_strict_origin": {
+    "message": "Strict Origin"
+  },
+  "rp_strict_origin_when_cross_origin": {
+    "message": "Strict Origin When Cross-Origin"
+  },
+  "rp_unsafe_url": {
+    "message": "Unsafe URL"
   }
 }

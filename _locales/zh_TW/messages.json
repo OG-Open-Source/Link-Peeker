@@ -1,70 +1,158 @@
 {
   "extensionName": {
-    "message": "Link Peeker 連結預覽",
-    "description": "擴充功能的名稱"
+    "message": "連結窺探者"
   },
   "extensionDescription": {
-    "message": "無需離開當前頁面即可預覽連結內容。",
-    "description": "擴充功能的描述"
+    "message": "無需離開當前頁面即可預覽連結。"
   },
   "settingsTitle": {
-    "message": "Link Peeker 設定",
-    "description": "設定頁面標題"
+    "message": "Link Peeker 設定"
   },
   "triggerKeyLabel": {
-    "message": "觸發鍵",
-    "description": "觸發鍵設定標籤"
+    "message": "觸發鍵"
   },
   "triggerKeyAlt": {
-    "message": "Alt + 點擊",
-    "description": "Alt + 點擊選項"
+    "message": "Alt + 點擊"
   },
   "triggerKeyCtrl": {
-    "message": "Ctrl + 點擊",
-    "description": "Ctrl + 點擊選項"
+    "message": "Ctrl + 點擊"
   },
   "triggerKeyShift": {
-    "message": "Shift + 點擊",
-    "description": "Shift + 點擊選項"
+    "message": "Shift + 點擊"
   },
   "themeLabel": {
-    "message": "主題",
-    "description": "主題設定標籤"
-  },
-  "languageLabel": {
-    "message": "語言",
-    "description": "語言設定標籤"
-  },
-  "themeAuto": {
-    "message": "自動 (與作業系統同步)",
-    "description": "自動主題選項"
+    "message": "主題"
   },
   "themeLight": {
-    "message": "亮色",
-    "description": "亮色主題選項"
+    "message": "亮色"
   },
   "themeDark": {
-    "message": "暗色",
-    "description": "暗色主題選項"
+    "message": "暗色"
+  },
+  "themeInverse": {
+    "message": "反轉"
+  },
+  "languageLabel": {
+    "message": "語言"
   },
   "langEn": {
-    "message": "English",
-    "description": "英文選項"
+    "message": "English"
+  },
+  "langZhCn": {
+    "message": "简体中文"
   },
   "langZhTw": {
-    "message": "繁體中文",
-    "description": "繁體中文選項"
+    "message": "繁體中文"
   },
-  "loadingText": {
-    "message": "載入中...",
-    "description": "預覽載入時顯示的文字"
+  "iframeConfigTitle": {
+    "message": "Iframe 配置"
   },
-  "openInNewTabText": {
-    "message": "在新分頁中開啟",
-    "description": "在新分頁中開啟連結的按鈕文字"
+  "sandboxLabel": {
+    "message": "沙箱權限"
   },
-  "closeButtonText": {
-    "message": "關閉",
-    "description": "關閉預覽的按鈕文字"
+  "sb_allow_forms": {
+    "message": "允許表單"
+  },
+  "sb_allow_modals": {
+    "message": "允許模態框"
+  },
+  "sb_allow_orientation_lock": {
+    "message": "允許方向鎖定"
+  },
+  "sb_allow_pointer_lock": {
+    "message": "允許指標鎖定"
+  },
+  "sb_allow_popups": {
+    "message": "允許彈窗"
+  },
+  "sb_allow_popups_to_escape_sandbox": {
+    "message": "允許彈窗逃逸沙箱"
+  },
+  "sb_allow_presentation": {
+    "message": "允許簡報"
+  },
+  "sb_allow_same_origin": {
+    "message": "允許同源"
+  },
+  "sb_allow_scripts": {
+    "message": "允許腳本"
+  },
+  "sb_allow_top_navigation": {
+    "message": "允許頂層導航"
+  },
+  "sb_allow_top_navigation_by_user_activation": {
+    "message": "允許使用者操作的頂層導航"
+  },
+  "sb_allow_downloads": {
+    "message": "允許下載"
+  },
+  "sb_allow_downloads_without_user_activation": {
+    "message": "允許無使用者操作的下載"
+  },
+  "sb_allow_storage_access_by_user_activation": {
+    "message": "允許使用者操作後存取儲存"
+  },
+  "featurePolicyLabel": {
+    "message": "特性策略 (Allow 清單)"
+  },
+  "fp_autoplay": {
+    "message": "自動播放"
+  },
+  "fp_camera": {
+    "message": "攝影機"
+  },
+  "fp_clipboard_write": {
+    "message": "寫入剪貼簿"
+  },
+  "fp_display_capture": {
+    "message": "螢幕擷取"
+  },
+  "fp_encrypted_media": {
+    "message": "加密媒體"
+  },
+  "fp_fullscreen": {
+    "message": "全螢幕"
+  },
+  "fp_geolocation": {
+    "message": "地理位置"
+  },
+  "fp_microphone": {
+    "message": "麥克風"
+  },
+  "fp_payment": {
+    "message": "付款"
+  },
+  "fp_screen_wake_lock": {
+    "message": "螢幕喚醒鎖定"
+  },
+  "fp_web_share": {
+    "message": "網頁分享"
+  },
+  "referrerPolicyLabel": {
+    "message": "參照位址政策"
+  },
+  "rp_no_referrer": {
+    "message": "不傳送參照位址"
+  },
+  "rp_no_referrer_when_downgrade": {
+    "message": "降級時不傳送參照位址"
+  },
+  "rp_origin": {
+    "message": "僅傳送來源"
+  },
+  "rp_origin_when_cross_origin": {
+    "message": "跨來源時傳送來源"
+  },
+  "rp_same_origin": {
+    "message": "僅同源傳送"
+  },
+  "rp_strict_origin": {
+    "message": "嚴格傳送來源"
+  },
+  "rp_strict_origin_when_cross_origin": {
+    "message": "跨來源時嚴格傳送來源"
+  },
+  "rp_unsafe_url": {
+    "message": "不安全 URL"
   }
 }
