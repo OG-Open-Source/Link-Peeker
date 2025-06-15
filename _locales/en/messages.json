@@ -1,0 +1,70 @@
+{
+  "extensionName": {
+    "message": "Link Peeker",
+    "description": "The name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Preview links without leaving your current page.",
+    "description": "The description of the extension."
+  },
+  "settingsTitle": {
+    "message": "Link Peeker Settings",
+    "description": "Title for the settings page."
+  },
+  "triggerKeyLabel": {
+    "message": "Trigger Key",
+    "description": "Label for the trigger key setting."
+  },
+  "triggerKeyAlt": {
+    "message": "Alt + Click",
+    "description": "Alt + Click option."
+  },
+  "triggerKeyCtrl": {
+    "message": "Ctrl + Click",
+    "description": "Ctrl + Click option."
+  },
+  "triggerKeyShift": {
+    "message": "Shift + Click",
+    "description": "Shift + Click option."
+  },
+  "themeLabel": {
+    "message": "Theme",
+    "description": "Label for the theme setting."
+  },
+  "languageLabel": {
+    "message": "Language",
+    "description": "Label for the language setting."
+  },
+  "themeAuto": {
+    "message": "Auto (Sync with OS)",
+    "description": "Auto theme option."
+  },
+  "themeLight": {
+    "message": "Light",
+    "description": "Light theme option."
+  },
+  "themeDark": {
+    "message": "Dark",
+    "description": "Dark theme option."
+  },
+  "langEn": {
+    "message": "English",
+    "description": "English language option."
+  },
+  "langZhTw": {
+    "message": "繁體中文",
+    "description": "Traditional Chinese language option."
+  },
+  "loadingText": {
+    "message": "Loading...",
+    "description": "Text shown while preview is loading."
+  },
+  "openInNewTabText": {
+    "message": "Open in New Tab",
+    "description": "Button text to open link in a new tab."
+  },
+  "closeButtonText": {
+    "message": "Close",
+    "description": "Button text to close the preview."
+  }
+}

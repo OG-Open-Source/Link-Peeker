@@ -1,0 +1,70 @@
+{
+  "extensionName": {
+    "message": "Link Peeker 連結預覽",
+    "description": "擴充功能的名稱"
+  },
+  "extensionDescription": {
+    "message": "無需離開當前頁面即可預覽連結內容。",
+    "description": "擴充功能的描述"
+  },
+  "settingsTitle": {
+    "message": "Link Peeker 設定",
+    "description": "設定頁面標題"
+  },
+  "triggerKeyLabel": {
+    "message": "觸發鍵",
+    "description": "觸發鍵設定標籤"
+  },
+  "triggerKeyAlt": {
+    "message": "Alt + 點擊",
+    "description": "Alt + 點擊選項"
+  },
+  "triggerKeyCtrl": {
+    "message": "Ctrl + 點擊",
+    "description": "Ctrl + 點擊選項"
+  },
+  "triggerKeyShift": {
+    "message": "Shift + 點擊",
+    "description": "Shift + 點擊選項"
+  },
+  "themeLabel": {
+    "message": "主題",
+    "description": "主題設定標籤"
+  },
+  "languageLabel": {
+    "message": "語言",
+    "description": "語言設定標籤"
+  },
+  "themeAuto": {
+    "message": "自動 (與作業系統同步)",
+    "description": "自動主題選項"
+  },
+  "themeLight": {
+    "message": "亮色",
+    "description": "亮色主題選項"
+  },
+  "themeDark": {
+    "message": "暗色",
+    "description": "暗色主題選項"
+  },
+  "langEn": {
+    "message": "English",
+    "description": "英文選項"
+  },
+  "langZhTw": {
+    "message": "繁體中文",
+    "description": "繁體中文選項"
+  },
+  "loadingText": {
+    "message": "載入中...",
+    "description": "預覽載入時顯示的文字"
+  },
+  "openInNewTabText": {
+    "message": "在新分頁中開啟",
+    "description": "在新分頁中開啟連結的按鈕文字"
+  },
+  "closeButtonText": {
+    "message": "關閉",
+    "description": "關閉預覽的按鈕文字"
+  }
+}

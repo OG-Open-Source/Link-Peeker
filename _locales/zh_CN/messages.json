@@ -1,0 +1,62 @@
+{
+  "extensionName": {
+    "message": "Link Peeker 链接预览",
+    "description": "扩展功能的名称"
+  },
+  "extensionDescription": {
+    "message": "无需离开当前页面即可预览链接内容。",
+    "description": "扩展功能的描述"
+  },
+  "settingsTitle": {
+    "message": "Link Peeker 设置",
+    "description": "设置页面标题"
+  },
+  "triggerKeyLabel": {
+    "message": "触发键",
+    "description": "触发键设置标签"
+  },
+  "triggerKeyAlt": {
+    "message": "Alt + 点击",
+    "description": "Alt + 点击选项"
+  },
+  "triggerKeyCtrl": {
+    "message": "Ctrl + 点击",
+    "description": "Ctrl + 点击选项"
+  },
+  "triggerKeyShift": {
+    "message": "Shift + 点击",
+    "description": "Shift + 点击选项"
+  },
+  "themeLabel": {
+    "message": "主题",
+    "description": "主题设置标签"
+  },
+  "themeAuto": {
+    "message": "自动 (与操作系统同步)",
+    "description": "自动主题选项"
+  },
+  "themeLight": {
+    "message": "亮色",
+    "description": "亮色主题选项"
+  },
+  "themeDark": {
+    "message": "暗色",
+    "description": "暗色主题选项"
+  },
+  "languageLabel": {
+    "message": "语言",
+    "description": "语言设置标签"
+  },
+  "langEn": {
+    "message": "English",
+    "description": "英文选项"
+  },
+  "langZhCn": {
+    "message": "简体中文",
+    "description": "简体中文选项"
+  },
+  "langZhTw": {
+    "message": "繁體中文",
+    "description": "繁體中文选项"
+  }
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link Peeker Settings</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="sidepanel.css" />
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 id="settingsTitle" class="title"></h1>
+
+        <div class="field">
+          <label id="triggerKeyLabel" class="label"></label>
+          <div class="control">
+            <div class="select">
+              <select id="triggerKey">
+                <option value="Alt"></option>
+                <option value="Ctrl"></option>
+                <option value="Shift"></option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label id="themeLabel" class="label"></label>
+          <div class="control">
+            <div class="select">
+              <select id="theme">
+                <option value="auto"></option>
+                <option value="light"></option>
+                <option value="dark"></option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label id="languageLabel" class="label"></label>
+          <div class="control">
+            <div class="select">
+              <select id="language">
+                <option value="en"></option>
+                <option value="zh_CN"></option>
+                <option value="zh_TW"></option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>
