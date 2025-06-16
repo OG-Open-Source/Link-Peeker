@@ -7,7 +7,6 @@ console.log("Link Peeker content script loaded.");
 const defaultSettings = {
   triggerKey: "Alt",
   theme: "inverse",
-  language: "en",
   referrerPolicy: "strict-origin-when-cross-origin",
   sandbox: {
     "allow-forms": true,

@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "链接窥探者"
+    "message": "Link Peeker"
   },
   "extensionDescription": {
     "message": "无需离开当前页面即可预览链接。"
@@ -93,7 +93,7 @@
     "message": "允许用户激活时访问存储"
   },
   "featurePolicyLabel": {
-    "message": "特性策略 (Allow 清单)"
+    "message": "特性策略"
   },
   "fp_autoplay": {
     "message": "自动播放"

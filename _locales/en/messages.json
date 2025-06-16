@@ -93,7 +93,7 @@
     "message": "Allow Storage Access by User Activation"
   },
   "featurePolicyLabel": {
-    "message": "Feature Policy (Allow List)"
+    "message": "Feature Policy"
   },
   "fp_autoplay": {
     "message": "Autoplay"

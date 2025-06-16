@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "連結窺探者"
+    "message": "Link Peeker"
   },
   "extensionDescription": {
     "message": "無需離開當前頁面即可預覽連結。"
@@ -93,7 +93,7 @@
     "message": "允許使用者操作後存取儲存"
   },
   "featurePolicyLabel": {
-    "message": "特性策略 (Allow 清單)"
+    "message": "特性策略"
   },
   "fp_autoplay": {
     "message": "自動播放"

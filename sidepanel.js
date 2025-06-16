@@ -7,7 +7,6 @@ console.log("Link Peeker side panel script loaded.");
 const defaultSettings = {
   triggerKey: "Alt",
   theme: "inverse",
-  language: "en",
   referrerPolicy: "strict-origin-when-cross-origin",
   sandbox: {
     "allow-forms": true,
@@ -85,7 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const elements = {
     triggerKey: document.getElementById("triggerKey"),
     theme: document.getElementById("theme"),
-    language: document.getElementById("language"),
     sandboxOptions: document.getElementById("sandbox-options"),
     allowOptions: document.getElementById("allow-options"),
     referrerPolicyOptions: document.getElementById("referrer-policy-options"),
@@ -98,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     elements.triggerKey.value = settings.triggerKey;
     elements.theme.value = settings.theme;
-    elements.language.value = settings.language;
 
     Object.keys(settings.sandbox).forEach((key) => {
       const checkbox = elements.sandboxOptions.querySelector(
@@ -127,7 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
     saveSettings({ theme: e.target.value });
     applyPanelTheme(e.target.value);
   });
-  elements.language.addEventListener("change", () => window.location.reload());
 
   elements.sandboxOptions.addEventListener("change", (e) => {
     if (e.target.matches('input[type="checkbox"]')) {
