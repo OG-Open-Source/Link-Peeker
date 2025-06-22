@@ -10,6 +10,7 @@ Link Peeker is a Chromium extension for quick, interactive link previews without
 - [Features](#features)
 - [Installation Guide](#installation-guide)
 - [Usage](#usage)
+- [Theme Customization](#theme-customization)
 - [Glossary](#glossary)
 - [Contributing](#contributing)
 - [License](#license)
@@ -22,17 +23,21 @@ Link Peeker is a powerful Chromium extension designed to boost your browsing pro
 
 - **Full Webpage Preview:** Instead of just metadata, Link Peeker loads the complete, interactive webpage inside a sandboxed `<iframe>`.
 - **Immersive UI:** The preview window appears centered on the screen with a semi-transparent, frosted-glass effect overlay.
-- **Dynamic Theming:**
-  - **Light & Dark Modes:** Clean, modern light and dark themes for the preview window.
-  - **Inverse Mode (Negative Effect):** A unique theme that inverts the colors of the previewed `<iframe>`, creating a "negative" effect that's useful for quick content scanning or accessibility.
+- **Advanced Theming System:**
+  - **Built-in Themes:** Comes with polished, hard-coded Light and Dark themes.
+  - **Visual Theme Editor:** A powerful editor in the settings page allows you to create, edit, and delete your own custom themes.
+  - **Detailed Customization:** Adjust everything from background/button colors to primary/secondary text colors, error message colors, and even enable/disable and control the intensity of the Gaussian blur effect.
+  - **Import & Export:** Easily share your creations by exporting themes to a JSON file, or import themes created by others.
+- **Intelligent YouTube Handling:**
+  - Previews the full, interactive YouTube page (including comments) when navigating within YouTube.
+  - Automatically switches to the embeddable player when previewing a YouTube link from any other website to ensure maximum compatibility.
 - **Fluid Animations:** Powered by GSAP for smooth, high-performance animations for the window, overlay, and loading indicators.
 - **Comprehensive Security Configuration:** A dedicated options page allows you to configure:
   - **Trigger Key:** `Alt`, `Ctrl`, or `Shift`.
-  - **Language:** English, Traditional Chinese (`zh_TW`), and Simplified Chinese (`zh_CN`).
   - **Sandbox Permissions:** Fine-tune the `<iframe>`'s core security restrictions with over 10 standard flags.
-  - **Feature Policy (Allow List):** Grant specific high-level API access (like `fullscreen`, `payment`, or `camera`) to the previewed page.
+  - **Feature Policy (Allow List):** Grant specific high-level API access (like `fullscreen` or `payment`) to the previewed page.
   - **Referrer Policy:** Choose from 8 different policies to control how much referrer information is sent.
-- **Modern & Secure:** Built with Manifest V3 and `declarativeNetRequest` to bypass `X-Frame-Options` and other anti-embedding headers securely.
+- **Modern & Secure:** Built with Manifest V3 and uses `declarativeNetRequest` to surgically bypass `X-Frame-Options` on specific, necessary domains like YouTube, without compromising overall security.
 
 ## Installation Guide
 
@@ -42,13 +47,11 @@ This project does not require any build steps or dependencies. You can load it d
 
 1.  **Clone or Download:** Get a local copy of this project's folder.
 2.  **Load the Extension in Your Browser:**
-
     - Open your Chromium-based browser (e.g., Google Chrome, Microsoft Edge, Brave).
     - Navigate to the extensions management page (usually `chrome://extensions`).
     - Enable **"Developer mode"**.
     - Click the **"Load unpacked"** button.
     - Select the entire project folder (the one containing `manifest.json`).
-
 3.  **Done!** The Link Peeker extension should now be installed and active.
 
 ## Usage
@@ -59,13 +62,27 @@ This project does not require any build steps or dependencies. You can load it d
 - **Close Preview:** You can also close the preview by clicking the dark overlay.
 - **Access Settings:** Right-click the extension icon and select "Options", or manage the extension through your browser's extension page to access the settings.
 
+## Theme Customization
+
+Link Peeker features a robust theme system.
+
+- **Selecting a Theme:** Choose from built-in themes or your own custom themes from the "Theme" dropdown in the settings.
+- **Creating a New Theme:**
+  1. Click the "Add New Theme" button.
+  2. A visual editor will appear, allowing you to configure all aspects of the theme.
+  3. Give your theme a name and click "Save Theme". It will now be available in the dropdown.
+- **Importing/Exporting:**
+  - **Import:** Click "Import from JSON" to load a theme file from your computer.
+  - **Export:** Select one of your custom themes from the dropdown and click "Export to JSON" to save it as a file.
+- **`themes.json` file:** This file in the project root can be used to bundle additional, shareable themes with the extension.
+
 ## Glossary
 
 - **Manifest V3:** The current standard for Chrome extensions, focusing on improved security, performance, and privacy.
-- **declarativeNetRequest:** A Manifest V3 API that allows extensions to modify network requests declaratively, used here to remove anti-framing headers.
+- **declarativeNetRequest:** A Manifest V3 API that allows extensions to modify network requests declaratively. Used here to remove anti-framing headers for specific domains.
 - **Shadow DOM:** A web standard used for CSS encapsulation. It creates a "shadow root" for an element, isolating its styles and structure from the main document's DOM.
-- **sandbox (iframe attribute):** A security feature that applies a set of restrictions to the content within an `<iframe>`. Link Peeker provides a comprehensive settings panel to let you configure these permissions.
-- **allow (iframe attribute):** A Feature Policy mechanism that allows you to selectively enable specific browser features (like fullscreen, payment processing, etc.) within the `<iframe>`.
+- **sandbox (iframe attribute):** A security feature that applies a set of restrictions to the content within an `<iframe>`.
+- **allow (iframe attribute):** A Feature Policy mechanism that allows you to selectively enable specific browser features within the `<iframe>`.
 
 ## Contributing
 
