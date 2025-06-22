@@ -154,5 +154,92 @@
   },
   "rp_unsafe_url": {
     "message": "不安全 URL"
+  },
+  "statusResolving": {
+    "message": "正在解析 URL..."
+  },
+  "statusLoading": {
+    "message": "正在載入: $url$",
+    "placeholders": {
+      "url": {
+        "content": "$1",
+        "example": "https://example.com"
+      }
+    }
+  },
+  "errorUnableToLoad": {
+    "message": "無法載入頁面。目標可能無法連線或已封鎖在 iframe 中檢視。"
+  },
+  "errorResolving": {
+    "message": "解析 URL 時發生錯誤: $error$",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "網路錯誤"
+      }
+    }
+  },
+  "errorBlocked": {
+    "message": "無法顯示頁面 $url$，因為其安全性原則 (X-Frame-Options 或 Content-Security-Policy) 禁止嵌入。",
+    "placeholders": {
+      "url": {
+        "content": "$1",
+        "example": "https://example.com"
+      }
+    }
+  },
+  "errorTimeout": {
+    "message": "請求逾時。頁面載入可能過慢或沒有回應。"
+  },
+  "themeCustomizationTitle": {
+    "message": "主題自訂"
+  },
+  "addNewTheme": {
+    "message": "新增主題"
+  },
+  "themeName": {
+    "message": "主題名稱"
+  },
+  "saveTheme": {
+    "message": "儲存主題"
+  },
+  "importTheme": {
+    "message": "從 JSON 匯入"
+  },
+  "blurEnabled": {
+    "message": "啟用模糊"
+  },
+  "blurAmount": {
+    "message": "模糊程度"
+  },
+  "boxBgColor": {
+    "message": "盒子背景"
+  },
+  "borderColor": {
+    "message": "邊框顏色"
+  },
+  "buttonBgColor": {
+    "message": "按鈕背景"
+  },
+  "buttonHoverBgColor": {
+    "message": "按鈕懸停背景"
+  },
+  "primaryTextColor": {
+    "message": "主要文字顏色"
+  },
+  "secondaryTextColor": {
+    "message": "次要文字顏色"
+  },
+  "errorColor": {
+    "message": "錯誤顏色"
+  },
+  "cancel": {
+    "message": "取消"
+  },
+  "exportTheme": {
+    "message": "匯出為 JSON"
+  },
+  "deleteTheme": {
+    "message": "刪除主題"
   }
 }

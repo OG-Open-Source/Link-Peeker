@@ -16,7 +16,12 @@
       ]
     },
     "condition": {
-      "urlFilter": "*://*/*",
+      "requestDomains": [
+        "youtube.com",
+        "www.youtube.com",
+        "m.youtube.com",
+        "youtu.be"
+      ],
       "resourceTypes": [
         "sub_frame"
       ]

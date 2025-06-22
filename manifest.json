@@ -1,12 +1,11 @@
 {
   "manifest_version": 3,
   "name": "__MSG_extensionName__",
-  "version": "1.2.1.3",
+  "version": "2.7.0.25",
   "description": "__MSG_extensionDescription__",
   "default_locale": "en",
   "permissions": [
     "storage",
-    "sidePanel",
     "declarativeNetRequest"
   ],
   "host_permissions": [
@@ -34,11 +33,12 @@
       ]
     }
   ],
-  "side_panel": {
-    "default_path": "sidepanel.html"
-  },
   "action": {
     "default_title": "Link Peeker"
+  },
+  "options_ui": {
+    "page": "main.html",
+    "open_in_tab": true
   },
   "icons": {
     "16": "assets/icons/icon16.png",
@@ -54,7 +54,8 @@
     {
       "resources": [
         "assets/lib/gsap.min.js",
-        "assets/lib/bulma.min.css"
+        "assets/lib/bulma.min.css",
+        "themes.json"
       ],
       "matches": [
         "<all_urls>"

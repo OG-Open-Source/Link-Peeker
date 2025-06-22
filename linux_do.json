@@ -1,0 +1,12 @@
+{
+  "name": "Linux Do",
+  "blurEnabled": true,
+  "blurAmount": 10,
+  "boxBg": "rgba(25, 25, 25, 0.85)",
+  "border": "#f9b823",
+  "buttonBg": "rgba(40, 40, 40, 0.7)",
+  "buttonHoverBg": "rgba(55, 55, 55, 0.9)",
+  "primaryTextColor": "#f0f0f0",
+  "secondaryTextColor": "#aaaaaa",
+  "errorColor": "#ff5252"
+}

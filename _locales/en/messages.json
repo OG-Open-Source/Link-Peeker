@@ -154,5 +154,92 @@
   },
   "rp_unsafe_url": {
     "message": "Unsafe URL"
+  },
+  "statusResolving": {
+    "message": "Resolving URL..."
+  },
+  "statusLoading": {
+    "message": "Loading: $url$",
+    "placeholders": {
+      "url": {
+        "content": "$1",
+        "example": "https://example.com"
+      }
+    }
+  },
+  "errorUnableToLoad": {
+    "message": "Unable to load page. The destination may be unreachable or has blocked viewing in an iframe."
+  },
+  "errorResolving": {
+    "message": "Error resolving URL: $error$",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Network error"
+      }
+    }
+  },
+  "errorBlocked": {
+    "message": "The page at $url$ cannot be displayed because its security policy (X-Frame-Options or Content-Security-Policy) prevents it from being embedded.",
+    "placeholders": {
+      "url": {
+        "content": "$1",
+        "example": "https://example.com"
+      }
+    }
+  },
+  "errorTimeout": {
+    "message": "The request timed out. The page might be loading too slowly or is unresponsive."
+  },
+  "themeCustomizationTitle": {
+    "message": "Theme Customization"
+  },
+  "addNewTheme": {
+    "message": "Add New Theme"
+  },
+  "themeName": {
+    "message": "Theme Name"
+  },
+  "saveTheme": {
+    "message": "Save Theme"
+  },
+  "importTheme": {
+    "message": "Import from JSON"
+  },
+  "blurEnabled": {
+    "message": "Enable Blur"
+  },
+  "blurAmount": {
+    "message": "Blur Amount"
+  },
+  "boxBgColor": {
+    "message": "Box Background"
+  },
+  "borderColor": {
+    "message": "Border Color"
+  },
+  "buttonBgColor": {
+    "message": "Button Background"
+  },
+  "buttonHoverBgColor": {
+    "message": "Button Hover Background"
+  },
+  "primaryTextColor": {
+    "message": "Primary Text Color"
+  },
+  "secondaryTextColor": {
+    "message": "Secondary Text Color"
+  },
+  "errorColor": {
+    "message": "Error Color"
+  },
+  "cancel": {
+    "message": "Cancel"
+  },
+  "exportTheme": {
+    "message": "Export to JSON"
+  },
+  "deleteTheme": {
+    "message": "Delete Theme"
   }
 }

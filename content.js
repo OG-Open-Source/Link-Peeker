@@ -47,23 +47,50 @@ const keyMap = {
   Shift: "shiftKey",
 };
 
-const THEMES = {
-  dark: {
-    "--box-bg": "rgba(0, 0, 0, 0.3)",
-    "--box-border": "rgba(0, 0, 0, 0.5)",
-    "--button-bg": "rgba(0, 0, 0, 0.3)",
-    "--button-hover-bg": "rgba(0, 0, 0, 0.5)",
-    "--button-color": "#f5f5f5",
-  },
+const BUILT_IN_THEMES = {
   light: {
-    "--box-bg": "rgba(255, 255, 255, 0.5)",
-    "--box-border": "rgba(255, 255, 255, 0.8)",
-    "--button-bg": "rgba(255, 255, 255, 0.5)",
-    "--button-hover-bg": "rgba(255, 255, 255, 0.8)",
-    "--button-color": "#363636",
+    name: chrome.i18n.getMessage("themeLight") || "Light",
+    blurEnabled: true,
+    blurAmount: 10,
+    boxBg: "rgba(255, 255, 255, 0.75)",
+    border: "#d1d1d1",
+    buttonBg: "rgba(245, 245, 245, 0.7)",
+    buttonHoverBg: "rgba(235, 235, 235, 0.9)",
+    primaryTextColor: "#222222",
+    secondaryTextColor: "#555555",
+    errorColor: "#d32f2f",
+  },
+  dark: {
+    name: chrome.i18n.getMessage("themeDark") || "Dark",
+    blurEnabled: true,
+    blurAmount: 10,
+    boxBg: "rgba(30, 30, 30, 0.75)",
+    border: "#424242",
+    buttonBg: "rgba(45, 45, 45, 0.7)",
+    buttonHoverBg: "rgba(60, 60, 60, 0.9)",
+    primaryTextColor: "#f5f5f5",
+    secondaryTextColor: "#bbbbbb",
+    errorColor: "#ff5252",
   },
 };
+let THEMES = { ...BUILT_IN_THEMES };
 
+async function loadThemes() {
+  let fileThemes = {};
+  try {
+    const response = await fetch(chrome.runtime.getURL("themes.json"));
+    fileThemes = await response.json();
+  } catch (error) {
+    console.log("No custom themes.json found or it's invalid. Skipping.");
+  }
+
+  const { customThemes } = await chrome.storage.local.get({ customThemes: {} });
+  THEMES = { ...BUILT_IN_THEMES, ...fileThemes, ...customThemes };
+  console.log("All themes loaded:", THEMES);
+}
+
+// Load themes and settings initially
+loadThemes();
 chrome.storage.sync.get(defaultSettings, (loadedSettings) => {
   settings = loadedSettings;
 });
@@ -97,7 +124,128 @@ function createPreviewWindow() {
   const shadowRoot = hostEl.attachShadow({ mode: "open" });
   shadowRoot.innerHTML = `
     <style>
-      :host{--box-bg:rgba(0,0,0,0.3);--box-border:rgba(0,0,0,0.5);--button-bg:rgba(0,0,0,0.3);--button-hover-bg:rgba(0,0,0,0.5);--button-color:#f5f5f5;}.box{box-sizing:border-box;-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);border-radius:12px;box-shadow:0 12px 24px rgba(0,0,0,0.25);display:flex;flex-direction:column;width:80vw;max-width:1280px;height:85vh;max-height:900px;padding:0;overflow:hidden;position:relative;background-color:var(--box-bg);border:3px solid var(--box-border);}.controls-container{position:absolute;top:1rem;left:0;transform:translateX(-100%);display:flex;flex-direction:column;gap:0.5rem;}.control-button{-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);border-right:none!important;border-radius:8px 0 0 8px!important;transition:background-color .2s;height:44px;width:44px;padding:0!important;display:flex;align-items:center;justify-content:center;background-color:var(--button-bg)!important;border:1px solid var(--box-border);color:var(--button-color);}.control-button:hover{background-color:var(--button-hover-bg)!important;}.icon svg{width:1.5em;height:1.5em;}.iframe-container{width:100%;height:100%;position:relative;}iframe{width:100%;height:100%;border:none;opacity:0;transition:opacity .3s;}.loader{border:4px solid #f3f3f3;border-top:4px solid #3498db;border-radius:50%;width:50px;height:50px;animation:spin 1s linear infinite;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5}@keyframes spin{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
+      :host {
+        --box-bg: rgba(30, 30, 30, 0.75);
+        --box-border: #424242;
+        --button-bg: rgba(45, 45, 45, 0.7);
+        --button-hover-bg: rgba(60, 60, 60, 0.9);
+        --primary-text-color: #f5f5f5;
+        --secondary-text-color: #bbbbbb;
+        --error-color: #ff5252;
+      }
+      .box {
+        box-sizing: border-box;
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        border-radius: 12px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        width: 80vw;
+        max-width: 1280px;
+        height: 85vh;
+        max-height: 900px;
+        padding: 0;
+        overflow: hidden;
+        position: relative;
+        background-color: var(--box-bg);
+        border: 3px solid var(--box-border);
+      }
+      .controls-container {
+        position: absolute;
+        top: 1rem;
+        left: 0;
+        transform: translateX(-100%);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .control-button {
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        border-right: none !important;
+        border-radius: 8px 0 0 8px !important;
+        transition: background-color 0.2s;
+        height: 44px;
+        width: 44px;
+        padding: 0 !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--button-bg) !important;
+        border: 1px solid var(--box-border);
+        color: var(--primary-text-color);
+      }
+      .control-button:hover {
+        background-color: var(--button-hover-bg) !important;
+      }
+      .icon svg {
+        width: 1.5em;
+        height: 1.5em;
+      }
+      .iframe-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .loader {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin-bottom: 15px;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .loading-status {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--secondary-text-color);
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 14px;
+        width: 90%;
+        max-width: 400px;
+        word-break: break-all;
+        z-index: 6;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .loading-status.error-state {
+        background-color: var(--box-border);
+        border: 1px solid #ff3860;
+        border-radius: 12px;
+      }
+      .loading-status .error-icon {
+        display: none;
+        margin: 0 auto 15px;
+        width: 64px;
+        height: 64px;
+        color: var(--error-color);
+      }
+      .loading-status .error-message {
+        color: var(--error-color);
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 1.4;
+      }
     </style>
     <div id="link-peeker-controls" class="controls-container">
        <button id="link-peeker-open" class="button control-button" title="Open in New Tab"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 19H6C5.45 19 5 18.55 5 18V6C5 5.45 5.45 5 6 5H11V7H7V17H17V13H19V18C19 18.55 18.55 19 18 19ZM14 4V6H16.59L7.76 14.83L9.17 16.24L18 7.41V10H20V4H14Z"></path></svg></span></button>
@@ -105,7 +253,14 @@ function createPreviewWindow() {
     </div>
     <div class="box">
       <div class="iframe-container">
-        <div class="loader"></div>
+        <div class="loading-status">
+          <div class="loader"></div>
+          <div class="error-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>
+          </div>
+          <span class="loading-url"></span>
+          <div class="error-message"></div>
+        </div>
         <iframe></iframe>
       </div>
     </div>
@@ -133,17 +288,42 @@ function detectPageTheme() {
 }
 
 function applyAppearance(shadowRoot) {
-  let themeToApply =
-    settings.theme === "inverse"
-      ? detectPageTheme() === "dark"
-        ? "light"
-        : "dark"
-      : settings.theme;
-  const themeConfig = THEMES[themeToApply];
+  let themeKey = settings.theme;
+  // The "inverse" logic is now handled by the settings page,
+  // but we keep a fallback for safety.
+  if (themeKey === "inverse") {
+    themeKey = detectPageTheme() === "dark" ? "light" : "dark";
+  }
+
+  const themeConfig = THEMES[themeKey] || THEMES["dark"]; // Fallback to dark theme
+
   if (themeConfig) {
-    for (const [key, value] of Object.entries(themeConfig)) {
-      shadowRoot.host.style.setProperty(key, value);
+    const box = shadowRoot.querySelector(".box");
+    if (box) {
+      box.style.backdropFilter = themeConfig.blurEnabled
+        ? `blur(${themeConfig.blurAmount}px)`
+        : "none";
+      box.style.webkitBackdropFilter = themeConfig.blurEnabled
+        ? `blur(${themeConfig.blurAmount}px)`
+        : "none";
     }
+
+    shadowRoot.host.style.setProperty("--box-bg", themeConfig.boxBg);
+    shadowRoot.host.style.setProperty("--box-border", themeConfig.border);
+    shadowRoot.host.style.setProperty("--button-bg", themeConfig.buttonBg);
+    shadowRoot.host.style.setProperty(
+      "--button-hover-bg",
+      themeConfig.buttonHoverBg
+    );
+    shadowRoot.host.style.setProperty(
+      "--primary-text-color",
+      themeConfig.primaryTextColor
+    );
+    shadowRoot.host.style.setProperty(
+      "--secondary-text-color",
+      themeConfig.secondaryTextColor
+    );
+    shadowRoot.host.style.setProperty("--error-color", themeConfig.errorColor);
   }
 }
 
@@ -230,26 +410,91 @@ document.addEventListener(
     overlay.addEventListener("click", closeWindow);
 
     const iframe = previewWindow.querySelector("iframe");
-    const loader = previewWindow.querySelector(".loader");
+    const loadingStatus = previewWindow.querySelector(".loading-status");
+    const loader = loadingStatus.querySelector(".loader");
+    const loadingUrl = loadingStatus.querySelector(".loading-url");
+    const errorMessage = loadingStatus.querySelector(".error-message");
+    const errorIcon = loadingStatus.querySelector(".error-icon");
+
     if (iframe) {
-      iframe.addEventListener("load", () => {
+      let loadTimeout;
+
+      const stopLoading = () => {
+        clearTimeout(loadTimeout);
         loader.style.display = "none";
-        iframe.style.opacity = "1";
-      });
+        loadingUrl.style.display = "none";
+      };
 
-      const sandboxPermissions = Object.entries(settings.sandbox)
-        .filter(([, v]) => v)
-        .map(([k]) => k)
-        .join(" ");
-      const allowPermissions = Object.entries(settings.allow)
-        .filter(([, v]) => v)
-        .map(([k]) => k)
-        .join("; ");
+      const showError = (messageKey, substitutions) => {
+        stopLoading();
+        loadingStatus.classList.add("error-state");
+        loadingUrl.textContent = "";
+        errorIcon.style.display = "block";
+        errorMessage.textContent =
+          chrome.i18n.getMessage(messageKey, substitutions) || messageKey;
+      };
 
-      iframe.setAttribute("sandbox", sandboxPermissions);
-      if (allowPermissions) iframe.setAttribute("allow", allowPermissions);
-      iframe.setAttribute("referrerpolicy", settings.referrerPolicy);
-      iframe.setAttribute("src", link.href);
+      loader.style.display = "block";
+      errorIcon.style.display = "none";
+      errorMessage.textContent = "";
+      loadingUrl.textContent = chrome.i18n.getMessage("statusResolving");
+
+      // Send URL to background script for resolution
+      chrome.runtime.sendMessage(
+        { type: "resolveUrl", url: link.href },
+        (response) => {
+          if (chrome.runtime.lastError) {
+            console.error(
+              "Link Peeker: Error resolving URL.",
+              chrome.runtime.lastError
+            );
+            showError("errorResolving", [chrome.runtime.lastError.message]);
+            return;
+          }
+
+          if (response.error) {
+            if (response.error === "blocked") {
+              showError("errorBlocked", [response.finalUrl]);
+            } else {
+              showError("errorUnableToLoad");
+            }
+            return;
+          }
+
+          const finalUrl = response.finalUrl;
+          loadingUrl.textContent = chrome.i18n.getMessage("statusLoading", [
+            finalUrl,
+          ]);
+
+          loadTimeout = setTimeout(() => {
+            showError("errorTimeout");
+          }, 10000); // 10-second timeout
+
+          iframe.addEventListener("load", () => {
+            stopLoading();
+            loadingStatus.style.display = "none";
+            iframe.style.opacity = "1";
+          });
+
+          iframe.addEventListener("error", () => {
+            showError("errorUnableToLoad");
+          });
+
+          const sandboxPermissions = Object.entries(settings.sandbox)
+            .filter(([, v]) => v)
+            .map(([k]) => k)
+            .join(" ");
+          const allowPermissions = Object.entries(settings.allow)
+            .filter(([, v]) => v)
+            .map(([k]) => k)
+            .join("; ");
+
+          iframe.setAttribute("sandbox", sandboxPermissions);
+          if (allowPermissions) iframe.setAttribute("allow", allowPermissions);
+          iframe.setAttribute("referrerpolicy", settings.referrerPolicy);
+          iframe.setAttribute("src", finalUrl);
+        }
+      );
     } else {
       console.error("Link Peeker: Iframe element not found.");
       closeWindow();

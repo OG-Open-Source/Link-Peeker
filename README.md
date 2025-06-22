@@ -26,7 +26,7 @@ Link Peeker is a powerful Chromium extension designed to boost your browsing pro
   - **Light & Dark Modes:** Clean, modern light and dark themes for the preview window.
   - **Inverse Mode (Negative Effect):** A unique theme that inverts the colors of the previewed `<iframe>`, creating a "negative" effect that's useful for quick content scanning or accessibility.
 - **Fluid Animations:** Powered by GSAP for smooth, high-performance animations for the window, overlay, and loading indicators.
-- **Comprehensive Security Configuration:** A dedicated side panel allows you to configure:
+- **Comprehensive Security Configuration:** A dedicated options page allows you to configure:
   - **Trigger Key:** `Alt`, `Ctrl`, or `Shift`.
   - **Language:** English, Traditional Chinese (`zh_TW`), and Simplified Chinese (`zh_CN`).
   - **Sandbox Permissions:** Fine-tune the `<iframe>`'s core security restrictions with over 10 standard flags.
@@ -57,7 +57,7 @@ This project does not require any build steps or dependencies. You can load it d
 - **Interact with Preview:** You can scroll and interact with the webpage inside the preview window.
 - **Use Controls:** Click the floating buttons on the left to open the link in a new tab or close the preview.
 - **Close Preview:** You can also close the preview by clicking the dark overlay.
-- **Access Settings:** Open your browser's side panel and select "Link Peeker" to configure trigger keys, themes, language, and detailed security settings.
+- **Access Settings:** Right-click the extension icon and select "Options", or manage the extension through your browser's extension page to access the settings.
 
 ## Glossary
 
