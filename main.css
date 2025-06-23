@@ -86,3 +86,33 @@ body {
 .option-text {
   color: var(--text-color);
 }
+
+/* --- New Layout Styles --- */
+.main-layout {
+  margin-top: 1.5rem;
+}
+
+.sidebar-menu {
+  position: sticky;
+  top: 1.5rem;
+}
+
+.sidebar-menu .menu-label {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.content-section {
+  display: none;
+  opacity: 0;
+}
+
+.content-section.is-active {
+  display: block;
+  /* GSAP will handle the opacity animation */
+}
+
+.menu-list a.is-active {
+  background-color: hsl(217, 71%, 53%);
+  color: #fff;
+}

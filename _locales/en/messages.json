@@ -276,5 +276,17 @@
         "content": "$1"
       }
     }
+  },
+  "navGeneral": {
+    "message": "General"
+  },
+  "navAppearance": {
+    "message": "Appearance"
+  },
+  "navRules": {
+    "message": "Rules"
+  },
+  "navAdvanced": {
+    "message": "Advanced"
   }
 }

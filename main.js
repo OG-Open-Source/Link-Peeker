@@ -577,4 +577,52 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+  // --- NAVIGATION & ANIMATION ---
+  const sidebarLinks = document.querySelectorAll(".sidebar-menu .menu-list a");
+
+  // Initial state animation
+  const initialActiveSection = document.querySelector(
+    ".content-section.is-active"
+  );
+  if (initialActiveSection) {
+    gsap.to(initialActiveSection, { opacity: 1, duration: 0.3 });
+  }
+
+  // Navigation click handler
+  sidebarLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const activeLink = document.querySelector(".sidebar-menu a.is-active");
+      const activeSection = document.querySelector(
+        ".content-section.is-active"
+      );
+      const targetId = link.dataset.target;
+      const targetSection = document.getElementById(targetId);
+
+      if (link === activeLink || !targetSection) {
+        return; // Do nothing if clicking active link or target is invalid
+      }
+
+      // Update active class on links
+      if (activeLink) {
+        activeLink.classList.remove("is-active");
+      }
+      link.classList.add("is-active");
+
+      // Animate sections
+      if (activeSection) {
+        gsap.to(activeSection, {
+          opacity: 0,
+          duration: 0.2,
+          onComplete: () => {
+            activeSection.classList.remove("is-active");
+            targetSection.classList.add("is-active");
+            gsap.to(targetSection, { opacity: 1, duration: 0.2, delay: 0.1 });
+          },
+        });
+      }
+    });
+  });
 });

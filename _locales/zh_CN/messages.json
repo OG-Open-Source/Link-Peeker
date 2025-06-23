@@ -276,5 +276,17 @@
         "content": "$1"
       }
     }
+  },
+  "navGeneral": {
+    "message": "通用设置"
+  },
+  "navAppearance": {
+    "message": "外观设置"
+  },
+  "navRules": {
+    "message": "规则设置"
+  },
+  "navAdvanced": {
+    "message": "高级设置"
   }
 }

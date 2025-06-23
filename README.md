@@ -32,12 +32,12 @@ Link Peeker is a powerful Chromium extension designed to boost your browsing pro
   - Previews the full, interactive YouTube page (including comments) when navigating within YouTube.
   - Automatically switches to the embeddable player when previewing a YouTube link from any other website to ensure maximum compatibility.
 - **Fluid Animations:** Powered by GSAP for smooth, high-performance animations for the window, overlay, and loading indicators.
-- **Comprehensive Security Configuration:** A dedicated options page allows you to configure:
-  - **Trigger Key:** `Alt`, `Ctrl`, or `Shift`.
-  - **Sandbox Permissions:** Fine-tune the `<iframe>`'s core security restrictions with over 10 standard flags.
-  - **Feature Policy (Allow List):** Grant specific high-level API access (like `fullscreen` or `payment`) to the previewed page.
-  - **Referrer Policy:** Choose from 8 different policies to control how much referrer information is sent.
-- **Modern & Secure:** Built with Manifest V3 and uses `declarativeNetRequest` to surgically bypass `X-Frame-Options` on specific, necessary domains like YouTube, without compromising overall security.
+- **Comprehensive Security Configuration:** A dedicated options page with a clean sidebar navigation allows you to configure:
+  - **General:** Set your preferred trigger key (`Alt`, `Ctrl`, or `Shift`).
+  - **Appearance:** Select a theme or use the visual editor to create your own.
+  - **Rules:** Define custom rules to remove restrictive headers (`X-Frame-Options`, `Content-Security-Policy`) for specific domains.
+  - **Advanced:** Fine-tune security settings like `Sandbox Permissions`, `Feature Policy`, and `Referrer Policy`.
+- **Modern & Secure:** Built with Manifest V3 and uses `declarativeNetRequest` to surgically bypass anti-framing headers on specific domains like YouTube, without compromising overall security.
 
 ## Installation Guide
 
@@ -60,7 +60,7 @@ This project does not require any build steps or dependencies. You can load it d
 - **Interact with Preview:** You can scroll and interact with the webpage inside the preview window.
 - **Use Controls:** Click the floating buttons on the left to open the link in a new tab or close the preview.
 - **Close Preview:** You can also close the preview by clicking the dark overlay.
-- **Access Settings:** Right-click the extension icon and select "Options", or manage the extension through your browser's extension page to access the settings.
+- **Access Settings:** Right-click the extension icon and select "Options", or manage the extension through your browser's extension page to access the settings. Use the sidebar to navigate between General, Appearance, Rules, and Advanced settings.
 
 ## Theme Customization
 
