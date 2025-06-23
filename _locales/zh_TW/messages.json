@@ -3,7 +3,7 @@
     "message": "Link Peeker"
   },
   "extensionDescription": {
-    "message": "無需離開當前頁面即可預覽連結。"
+    "message": "在不離開當前頁面的情況下預覽連結。"
   },
   "settingsTitle": {
     "message": "Link Peeker 設定"
@@ -29,9 +29,6 @@
   "themeDark": {
     "message": "暗色"
   },
-  "themeInverse": {
-    "message": "反轉"
-  },
   "languageLabel": {
     "message": "語言"
   },
@@ -45,10 +42,10 @@
     "message": "繁體中文"
   },
   "iframeConfigTitle": {
-    "message": "Iframe 配置"
+    "message": "Iframe 設定"
   },
   "sandboxLabel": {
-    "message": "沙箱權限"
+    "message": "沙盒權限"
   },
   "sb_allow_forms": {
     "message": "允許表單"
@@ -63,13 +60,13 @@
     "message": "允許指標鎖定"
   },
   "sb_allow_popups": {
-    "message": "允許彈窗"
+    "message": "允許彈出視窗"
   },
   "sb_allow_popups_to_escape_sandbox": {
-    "message": "允許彈窗逃逸沙箱"
+    "message": "允許彈出視窗逃離沙盒"
   },
   "sb_allow_presentation": {
-    "message": "允許簡報"
+    "message": "允許演示"
   },
   "sb_allow_same_origin": {
     "message": "允許同源"
@@ -78,19 +75,19 @@
     "message": "允許腳本"
   },
   "sb_allow_top_navigation": {
-    "message": "允許頂層導航"
+    "message": "允許頂層導覽"
   },
   "sb_allow_top_navigation_by_user_activation": {
-    "message": "允許使用者操作的頂層導航"
+    "message": "允許使用者啟動的頂層導覽"
   },
   "sb_allow_downloads": {
     "message": "允許下載"
   },
   "sb_allow_downloads_without_user_activation": {
-    "message": "允許無使用者操作的下載"
+    "message": "允許無使用者啟動的下載"
   },
   "sb_allow_storage_access_by_user_activation": {
-    "message": "允許使用者操作後存取儲存"
+    "message": "允許使用者啟動時存取儲存空間"
   },
   "featurePolicyLabel": {
     "message": "特性策略"
@@ -153,7 +150,7 @@
     "message": "跨來源時嚴格傳送來源"
   },
   "rp_unsafe_url": {
-    "message": "不安全 URL"
+    "message": "不安全的 URL"
   },
   "statusResolving": {
     "message": "正在解析 URL..."
@@ -162,34 +159,31 @@
     "message": "正在載入: $url$",
     "placeholders": {
       "url": {
-        "content": "$1",
-        "example": "https://example.com"
+        "content": "$1"
       }
     }
   },
   "errorUnableToLoad": {
-    "message": "無法載入頁面。目標可能無法連線或已封鎖在 iframe 中檢視。"
+    "message": "無法載入頁面。目標可能無法存取或已禁止在 iframe 中檢視。"
   },
   "errorResolving": {
     "message": "解析 URL 時發生錯誤: $error$",
     "placeholders": {
       "error": {
-        "content": "$1",
-        "example": "網路錯誤"
+        "content": "$1"
       }
     }
   },
   "errorBlocked": {
-    "message": "無法顯示頁面 $url$，因為其安全性原則 (X-Frame-Options 或 Content-Security-Policy) 禁止嵌入。",
+    "message": "無法顯示頁面 $url$，因為其安全策略 (X-Frame-Options 或 Content-Security-Policy) 禁止嵌入。",
     "placeholders": {
       "url": {
-        "content": "$1",
-        "example": "https://example.com"
+        "content": "$1"
       }
     }
   },
   "errorTimeout": {
-    "message": "請求逾時。頁面載入可能過慢或沒有回應。"
+    "message": "請求超時。頁面載入可能過慢或沒有回應。"
   },
   "themeCustomizationTitle": {
     "message": "主題自訂"
@@ -213,7 +207,7 @@
     "message": "模糊程度"
   },
   "boxBgColor": {
-    "message": "盒子背景"
+    "message": "預覽框背景"
   },
   "borderColor": {
     "message": "邊框顏色"
@@ -241,5 +235,46 @@
   },
   "deleteTheme": {
     "message": "刪除主題"
+  },
+  "customRulesTitle": {
+    "message": "自訂規則"
+  },
+  "domainLabel": {
+    "message": "網域"
+  },
+  "headersToRemoveLabel": {
+    "message": "要移除的標頭"
+  },
+  "addRuleBtn": {
+    "message": "新增規則"
+  },
+  "activeRulesTitle": {
+    "message": "目前生效的自訂規則"
+  },
+  "domainHeader": {
+    "message": "網域"
+  },
+  "removedHeadersHeader": {
+    "message": "移除的標頭"
+  },
+  "noCustomRules": {
+    "message": "沒有定義自訂規則。"
+  },
+  "deleteRuleBtn": {
+    "message": "刪除"
+  },
+  "error_select_header": {
+    "message": "請至少選擇一個要移除的標頭。"
+  },
+  "error_duplicate_rule": {
+    "message": "此網域的規則已存在。"
+  },
+  "confirm_delete_rule": {
+    "message": "您確定要刪除 $domain$ 的規則嗎？",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
   }
 }

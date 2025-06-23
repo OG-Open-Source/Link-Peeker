@@ -288,13 +288,7 @@ function detectPageTheme() {
 }
 
 function applyAppearance(shadowRoot) {
-  let themeKey = settings.theme;
-  // The "inverse" logic is now handled by the settings page,
-  // but we keep a fallback for safety.
-  if (themeKey === "inverse") {
-    themeKey = detectPageTheme() === "dark" ? "light" : "dark";
-  }
-
+  const themeKey = settings.theme;
   const themeConfig = THEMES[themeKey] || THEMES["dark"]; // Fallback to dark theme
 
   if (themeConfig) {
@@ -431,7 +425,7 @@ document.addEventListener(
         loadingUrl.textContent = "";
         errorIcon.style.display = "block";
         errorMessage.textContent =
-          chrome.i18n.getMessage(messageKey, substitutions) || messageKey;
+          chrome.i18n.getMessage(messageKey, substitutions || []) || messageKey;
       };
 
       loader.style.display = "block";

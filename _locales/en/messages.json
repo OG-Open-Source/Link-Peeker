@@ -29,9 +29,6 @@
   "themeDark": {
     "message": "Dark"
   },
-  "themeInverse": {
-    "message": "Inverse"
-  },
   "languageLabel": {
     "message": "Language"
   },
@@ -162,8 +159,7 @@
     "message": "Loading: $url$",
     "placeholders": {
       "url": {
-        "content": "$1",
-        "example": "https://example.com"
+        "content": "$1"
       }
     }
   },
@@ -174,8 +170,7 @@
     "message": "Error resolving URL: $error$",
     "placeholders": {
       "error": {
-        "content": "$1",
-        "example": "Network error"
+        "content": "$1"
       }
     }
   },
@@ -183,8 +178,7 @@
     "message": "The page at $url$ cannot be displayed because its security policy (X-Frame-Options or Content-Security-Policy) prevents it from being embedded.",
     "placeholders": {
       "url": {
-        "content": "$1",
-        "example": "https://example.com"
+        "content": "$1"
       }
     }
   },
@@ -241,5 +235,46 @@
   },
   "deleteTheme": {
     "message": "Delete Theme"
+  },
+  "customRulesTitle": {
+    "message": "Custom Rules"
+  },
+  "domainLabel": {
+    "message": "Domain"
+  },
+  "headersToRemoveLabel": {
+    "message": "Headers to Remove"
+  },
+  "addRuleBtn": {
+    "message": "Add Rule"
+  },
+  "activeRulesTitle": {
+    "message": "Active Custom Rules"
+  },
+  "domainHeader": {
+    "message": "Domain"
+  },
+  "removedHeadersHeader": {
+    "message": "Removed Headers"
+  },
+  "noCustomRules": {
+    "message": "No custom rules defined."
+  },
+  "deleteRuleBtn": {
+    "message": "Delete"
+  },
+  "error_select_header": {
+    "message": "Please select at least one header to remove."
+  },
+  "error_duplicate_rule": {
+    "message": "A rule for this domain already exists."
+  },
+  "confirm_delete_rule": {
+    "message": "Are you sure you want to delete the rule for $domain$?",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
   }
 }

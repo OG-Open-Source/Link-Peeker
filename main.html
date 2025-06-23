@@ -203,102 +203,91 @@
         <!-- Iframe Configuration -->
         <h2 class="subtitle" data-i18n="iframeConfigTitle"></h2>
 
+        <!-- Custom Rules Configuration -->
+        <h3 class="subtitle" data-i18n="customRulesTitle">Custom Rules</h3>
+        <div class="box">
+          <form id="add-rule-form">
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label" data-i18n="domainLabel">Domain</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    <input
+                      class="input"
+                      type="text"
+                      id="rule-domain-input"
+                      placeholder="e.g., example.com"
+                      required
+                    />
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-label">
+                <label class="label" data-i18n="headersToRemoveLabel"
+                  >Headers to Remove</label
+                >
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <label class="checkbox">
+                      <input type="checkbox" id="rule-remove-csp" />
+                      Content-Security-Policy
+                    </label>
+                    <label class="checkbox">
+                      <input type="checkbox" id="rule-remove-xfo" />
+                      X-Frame-Options
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-label">
+                <!-- Left empty for spacing -->
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <button
+                      type="submit"
+                      class="button is-primary"
+                      data-i18n="addRuleBtn"
+                    >
+                      Add Rule
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <h3 class="subtitle is-5" data-i18n="activeRulesTitle">
+          Active Custom Rules
+        </h3>
+        <table class="table is-fullwidth is-striped is-hoverable">
+          <thead>
+            <tr>
+              <th data-i18n="domainHeader">Domain</th>
+              <th data-i18n="removedHeadersHeader">Removed Headers</th>
+              <th><!-- Action column --></th>
+            </tr>
+          </thead>
+          <tbody id="custom-rules-table-body">
+            <!-- Rules will be dynamically inserted here -->
+          </tbody>
+        </table>
+
         <!-- Sandbox Permissions -->
         <details class="config-section">
           <summary data-i18n="sandboxLabel"></summary>
           <div class="config-options" id="sandbox-options">
-            <label class="checkbox"
-              ><input type="checkbox" data-key="allow-forms" /><span
-                class="option-text"
-                data-i18n="sb_allow_forms"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="allow-modals" /><span
-                class="option-text"
-                data-i18n="sb_allow_modals"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="allow-orientation-lock" /><span
-                class="option-text"
-                data-i18n="sb_allow_orientation_lock"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="allow-pointer-lock" /><span
-                class="option-text"
-                data-i18n="sb_allow_pointer_lock"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="allow-popups" /><span
-                class="option-text"
-                data-i18n="sb_allow_popups"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input
-                type="checkbox"
-                data-key="allow-popups-to-escape-sandbox" /><span
-                class="option-text"
-                data-i18n="sb_allow_popups_to_escape_sandbox"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="allow-presentation" /><span
-                class="option-text"
-                data-i18n="sb_allow_presentation"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="allow-same-origin" /><span
-                class="option-text"
-                data-i18n="sb_allow_same_origin"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="allow-scripts" /><span
-                class="option-text"
-                data-i18n="sb_allow_scripts"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="allow-top-navigation" /><span
-                class="option-text"
-                data-i18n="sb_allow_top_navigation"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input
-                type="checkbox"
-                data-key="allow-top-navigation-by-user-activation" /><span
-                class="option-text"
-                data-i18n="sb_allow_top_navigation_by_user_activation"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="allow-downloads" /><span
-                class="option-text"
-                data-i18n="sb_allow_downloads"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input
-                type="checkbox"
-                data-key="allow-downloads-without-user-activation" /><span
-                class="option-text"
-                data-i18n="sb_allow_downloads_without_user_activation"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input
-                type="checkbox"
-                data-key="allow-storage-access-by-user-activation" /><span
-                class="option-text"
-                data-i18n="sb_allow_storage_access_by_user_activation"
-              ></span
-            ></label>
+            <!-- Options will be dynamically inserted here -->
           </div>
         </details>
 
@@ -306,72 +295,7 @@
         <details class="config-section">
           <summary data-i18n="featurePolicyLabel"></summary>
           <div class="config-options" id="allow-options">
-            <label class="checkbox"
-              ><input type="checkbox" data-key="autoplay" /><span
-                class="option-text"
-                data-i18n="fp_autoplay"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="camera" /><span
-                class="option-text"
-                data-i18n="fp_camera"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="clipboard-write" /><span
-                class="option-text"
-                data-i18n="fp_clipboard_write"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="display-capture" /><span
-                class="option-text"
-                data-i18n="fp_display_capture"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="encrypted-media" /><span
-                class="option-text"
-                data-i18n="fp_encrypted_media"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="fullscreen" /><span
-                class="option-text"
-                data-i18n="fp_fullscreen"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="geolocation" /><span
-                class="option-text"
-                data-i18n="fp_geolocation"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="microphone" /><span
-                class="option-text"
-                data-i18n="fp_microphone"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="payment" /><span
-                class="option-text"
-                data-i18n="fp_payment"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="screen-wake-lock" /><span
-                class="option-text"
-                data-i18n="fp_screen_wake_lock"
-              ></span
-            ></label>
-            <label class="checkbox"
-              ><input type="checkbox" data-key="web-share" /><span
-                class="option-text"
-                data-i18n="fp_web_share"
-              ></span
-            ></label>
+            <!-- Options will be dynamically inserted here -->
           </div>
         </details>
 
@@ -379,72 +303,7 @@
         <details class="config-section">
           <summary data-i18n="referrerPolicyLabel"></summary>
           <div class="config-options" id="referrer-policy-options">
-            <label class="radio"
-              ><input type="radio" name="referrer" value="no-referrer" /><span
-                class="risk-low"
-              ></span>
-              <span class="option-text" data-i18n="rp_no_referrer"></span
-            ></label>
-            <label class="radio"
-              ><input
-                type="radio"
-                name="referrer"
-                value="no-referrer-when-downgrade" /><span
-                class="risk-high"
-              ></span>
-              <span
-                class="option-text"
-                data-i18n="rp_no_referrer_when_downgrade"
-              ></span
-            ></label>
-            <label class="radio"
-              ><input type="radio" name="referrer" value="origin" /><span
-                class="risk-medium"
-              ></span>
-              <span class="option-text" data-i18n="rp_origin"></span
-            ></label>
-            <label class="radio"
-              ><input
-                type="radio"
-                name="referrer"
-                value="origin-when-cross-origin" /><span
-                class="risk-medium"
-              ></span>
-              <span
-                class="option-text"
-                data-i18n="rp_origin_when_cross_origin"
-              ></span
-            ></label>
-            <label class="radio"
-              ><input type="radio" name="referrer" value="same-origin" /><span
-                class="risk-medium"
-              ></span>
-              <span class="option-text" data-i18n="rp_same_origin"></span
-            ></label>
-            <label class="radio"
-              ><input type="radio" name="referrer" value="strict-origin" /><span
-                class="risk-low"
-              ></span>
-              <span class="option-text" data-i18n="rp_strict_origin"></span
-            ></label>
-            <label class="radio"
-              ><input
-                type="radio"
-                name="referrer"
-                value="strict-origin-when-cross-origin" /><span
-                class="risk-low"
-              ></span>
-              <span
-                class="option-text"
-                data-i18n="rp_strict_origin_when_cross_origin"
-              ></span
-            ></label>
-            <label class="radio"
-              ><input type="radio" name="referrer" value="unsafe-url" /><span
-                class="risk-high"
-              ></span>
-              <span class="option-text" data-i18n="rp_unsafe_url"></span
-            ></label>
+            <!-- Options will be dynamically inserted here -->
           </div>
         </details>
       </div>

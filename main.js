@@ -4,12 +4,37 @@
  */
 console.log("Link Peeker side panel script loaded.");
 
+const REFERRER_POLICIES = [
+  "no-referrer",
+  "no-referrer-when-downgrade",
+  "origin",
+  "origin-when-cross-origin",
+  "same-origin",
+  "strict-origin",
+  "strict-origin-when-cross-origin",
+  "unsafe-url",
+];
+
 const defaultSettings = {
   triggerKey: "Alt",
   theme: "dark",
   blurAmount: 5,
   referrerPolicy: "strict-origin-when-cross-origin",
   customThemes: {},
+  customRules: [
+    {
+      domain: "*.youtube.com",
+      headersToRemove: ["X-Frame-Options", "Content-Security-Policy"],
+    },
+    {
+      domain: "youtu.be",
+      headersToRemove: ["X-Frame-Options", "Content-Security-Policy"],
+    },
+    {
+      domain: "github.com",
+      headersToRemove: ["Content-Security-Policy"],
+    },
+  ],
   sandbox: {
     "allow-forms": true,
     "allow-modals": true,
@@ -98,6 +123,29 @@ function applyTranslations() {
     }
   });
   document.title = chrome.i18n.getMessage("settingsTitle");
+}
+
+function createPolicyOption(type, key, i18nKey, container) {
+  const label = document.createElement("label");
+  label.className = type;
+
+  const input = document.createElement("input");
+  input.type = type;
+  input.dataset.key = key;
+  if (type === "radio") {
+    input.name = "referrer";
+    input.value = key;
+  }
+
+  const span = document.createElement("span");
+  span.className = "option-text";
+
+  const plainText = chrome.i18n.getMessage(i18nKey) || i18nKey;
+  span.textContent = `${plainText} (${key})`;
+
+  label.appendChild(input);
+  label.appendChild(span);
+  container.appendChild(label);
 }
 
 function applyPanelTheme(theme) {
@@ -199,6 +247,11 @@ document.addEventListener("DOMContentLoaded", () => {
     importThemeInput: document.getElementById("import-theme-input"),
     exportThemeBtn: document.getElementById("export-theme-btn"),
     deleteThemeBtn: document.getElementById("delete-theme-btn"),
+    addRuleForm: document.getElementById("add-rule-form"),
+    ruleDomainInput: document.getElementById("rule-domain-input"),
+    ruleRemoveCsp: document.getElementById("rule-remove-csp"),
+    ruleRemoveXfo: document.getElementById("rule-remove-xfo"),
+    customRulesTableBody: document.getElementById("custom-rules-table-body"),
   };
 
   let allThemes = {};
@@ -212,6 +265,33 @@ document.addEventListener("DOMContentLoaded", () => {
     allThemes = await loadAllThemes();
     populateThemeDropdown(allThemes, settings.theme);
 
+    // Dynamically create and populate policy options
+    Object.keys(defaultSettings.sandbox).forEach((key) => {
+      createPolicyOption(
+        "checkbox",
+        key,
+        `sb_${key.replace(/-/g, "_")}`,
+        elements.sandboxOptions
+      );
+    });
+    Object.keys(defaultSettings.allow).forEach((key) => {
+      createPolicyOption(
+        "checkbox",
+        key,
+        `fp_${key.replace(/-/g, "_")}`,
+        elements.allowOptions
+      );
+    });
+    REFERRER_POLICIES.forEach((key) => {
+      createPolicyOption(
+        "radio",
+        key,
+        `rp_${key.replace(/-/g, "_")}`,
+        elements.referrerPolicyOptions
+      );
+    });
+
+    // Set saved values
     Object.keys(settings.sandbox).forEach((key) => {
       const checkbox = elements.sandboxOptions.querySelector(
         `[data-key="${key}"]`
@@ -230,6 +310,8 @@ document.addEventListener("DOMContentLoaded", () => {
       `[value="${settings.referrerPolicy}"]`
     );
     if (radio) radio.checked = true;
+
+    renderCustomRules(settings.customRules || []);
   });
 
   // --- EVENT LISTENERS ---
@@ -404,6 +486,95 @@ document.addEventListener("DOMContentLoaded", () => {
   elements.referrerPolicyOptions.addEventListener("change", (e) => {
     if (e.target.matches('input[type="radio"]')) {
       saveSettings({ referrerPolicy: e.target.value });
+    }
+  });
+
+  // --- CUSTOM RULE MANAGEMENT ---
+  function renderCustomRules(rules) {
+    elements.customRulesTableBody.innerHTML = "";
+    if (!rules || rules.length === 0) {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td colspan="3" class="has-text-centered" data-i18n="noCustomRules">No custom rules defined.</td>`;
+      elements.customRulesTableBody.appendChild(row);
+      return;
+    }
+
+    rules.forEach((rule, index) => {
+      const row = document.createElement("tr");
+      const headers = rule.headersToRemove.join(", ");
+      row.innerHTML = `
+        <td>${rule.domain}</td>
+        <td>${headers}</td>
+        <td class="has-text-right">
+          <button class="button is-danger is-small delete-rule-btn" data-index="${index}" data-i18n="deleteRuleBtn">Delete</button>
+        </td>
+      `;
+      elements.customRulesTableBody.appendChild(row);
+    });
+  }
+
+  async function updateCustomRules(newRules) {
+    currentSettings.customRules = newRules;
+    await chrome.storage.sync.set({ customRules: newRules });
+    chrome.runtime.sendMessage({ action: "updateRules", rules: newRules });
+    renderCustomRules(newRules);
+  }
+
+  elements.addRuleForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const domain = elements.ruleDomainInput.value.trim();
+    if (!domain) return;
+
+    const headersToRemove = [];
+    if (elements.ruleRemoveCsp.checked)
+      headersToRemove.push("Content-Security-Policy");
+    if (elements.ruleRemoveXfo.checked) headersToRemove.push("X-Frame-Options");
+
+    if (headersToRemove.length === 0) {
+      alert(
+        chrome.i18n.getMessage("error_select_header") ||
+          "Please select at least one header to remove."
+      );
+      return;
+    }
+
+    const newRule = { domain, headersToRemove };
+    const existingRules = currentSettings.customRules || [];
+
+    // Check for duplicates
+    if (existingRules.some((rule) => rule.domain === domain)) {
+      alert(
+        chrome.i18n.getMessage("error_duplicate_rule") ||
+          "A rule for this domain already exists."
+      );
+      return;
+    }
+
+    const updatedRules = [...existingRules, newRule];
+    await updateCustomRules(updatedRules);
+
+    elements.addRuleForm.reset();
+  });
+
+  elements.customRulesTableBody.addEventListener("click", async (e) => {
+    if (e.target.classList.contains("delete-rule-btn")) {
+      const indexToDelete = parseInt(e.target.dataset.index, 10);
+      const existingRules = currentSettings.customRules || [];
+      const ruleToDelete = existingRules[indexToDelete];
+
+      if (
+        confirm(
+          chrome.i18n.getMessage("confirm_delete_rule", [
+            ruleToDelete.domain,
+          ]) ||
+            `Are you sure you want to delete the rule for ${ruleToDelete.domain}?`
+        )
+      ) {
+        const updatedRules = existingRules.filter(
+          (_, index) => index !== indexToDelete
+        );
+        await updateCustomRules(updatedRules);
+      }
     }
   });
 });
