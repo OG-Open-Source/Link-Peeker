@@ -352,13 +352,16 @@ document.addEventListener("DOMContentLoaded", () => {
       elements.themeEditor.reset();
       elements.themeIdInput.value = `custom_${Date.now()}`;
     }
-    elements.themeEditor.classList.remove("is-hidden");
     elements.addThemeBtn.classList.add("is-hidden");
+    elements.themeEditor.classList.remove("is-hidden");
+    slideDown(elements.themeEditor);
   };
 
   const hideThemeEditor = () => {
-    elements.themeEditor.classList.add("is-hidden");
-    elements.addThemeBtn.classList.remove("is-hidden");
+    slideUp(elements.themeEditor, () => {
+      elements.themeEditor.classList.add("is-hidden");
+      elements.addThemeBtn.classList.remove("is-hidden");
+    });
   };
 
   elements.addThemeBtn.addEventListener("click", () => showThemeEditor());
@@ -578,16 +581,72 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // --- ANIMATION UTILITIES (Web Animations API) ---
+  function slideUp(element, callback) {
+    element.style.height = `${element.offsetHeight}px`;
+    requestAnimationFrame(() => {
+      const animation = element.animate(
+        [
+          { height: `${element.offsetHeight}px`, opacity: 1 },
+          { height: "0px", opacity: 0 },
+        ],
+        { duration: 200, easing: "ease-in-out" }
+      );
+      animation.onfinish = callback;
+    });
+  }
+
+  function slideDown(element, callback) {
+    const animation = element.animate(
+      [
+        { height: "0px", opacity: 0 },
+        { height: `${element.scrollHeight}px`, opacity: 1 },
+      ],
+      { duration: 200, easing: "ease-in-out" }
+    );
+    animation.onfinish = () => {
+      element.style.height = "auto";
+      if (callback) callback();
+    };
+  }
+
+  function fadeIn(element) {
+    element.animate([{ opacity: 0 }, { opacity: 1 }], {
+      duration: 300,
+      easing: "ease-in-out",
+    });
+  }
+
   // --- NAVIGATION & ANIMATION ---
   const sidebarLinks = document.querySelectorAll(".sidebar-menu .menu-list a");
+  const detailsElements = document.querySelectorAll(".config-section");
 
   // Initial state animation
   const initialActiveSection = document.querySelector(
     ".content-section.is-active"
   );
   if (initialActiveSection) {
-    gsap.to(initialActiveSection, { opacity: 1, duration: 0.3 });
+    initialActiveSection.style.display = "block";
+    fadeIn(initialActiveSection);
   }
+
+  // Accordion animation for <details>
+  detailsElements.forEach((details) => {
+    const summary = details.querySelector("summary");
+    const content = details.querySelector(".config-options");
+
+    summary.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (details.open) {
+        slideUp(content, () => {
+          details.open = false;
+        });
+      } else {
+        details.open = true;
+        slideDown(content);
+      }
+    });
+  });
 
   // Navigation click handler
   sidebarLinks.forEach((link) => {
@@ -602,27 +661,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const targetSection = document.getElementById(targetId);
 
       if (link === activeLink || !targetSection) {
-        return; // Do nothing if clicking active link or target is invalid
+        return;
       }
 
-      // Update active class on links
-      if (activeLink) {
-        activeLink.classList.remove("is-active");
-      }
+      if (activeLink) activeLink.classList.remove("is-active");
       link.classList.add("is-active");
 
-      // Animate sections
       if (activeSection) {
-        gsap.to(activeSection, {
-          opacity: 0,
-          duration: 0.2,
-          onComplete: () => {
-            activeSection.classList.remove("is-active");
-            targetSection.classList.add("is-active");
-            gsap.to(targetSection, { opacity: 1, duration: 0.2, delay: 0.1 });
-          },
-        });
+        activeSection.classList.remove("is-active");
+        activeSection.style.display = "none";
       }
+      targetSection.classList.add("is-active");
+      targetSection.style.display = "block";
+      fadeIn(targetSection);
     });
   });
 });

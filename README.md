@@ -95,6 +95,8 @@ Link Peeker features a robust theme system.
 
 This repository is licensed under the [MIT License](https://opensource.org/licenses/mit-license.php).
 
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+
 ---
 
 © 2025 [OG-Open-Source](https://github.com/OG-Open-Source). All rights reserved.

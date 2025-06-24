@@ -1,27 +1,18 @@
 {
   "manifest_version": 3,
-  "name": "__MSG_extensionName__",
-  "version": "3.1.0.42",
+  "name": "Link Peeker",
+  "version": "3.2.0.47",
   "description": "__MSG_extensionDescription__",
   "default_locale": "en",
-  "permissions": [
-    "storage",
-    "declarativeNetRequest"
-  ],
-  "host_permissions": [
-    "<all_urls>"
-  ],
+  "permissions": ["storage", "declarativeNetRequest"],
+  "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "content.js"
-      ]
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
     }
   ],
   "action": {
@@ -51,9 +42,7 @@
         "assets/lib/bulma.min.css",
         "themes.json"
       ],
-      "matches": [
-        "<all_urls>"
-      ]
+      "matches": ["<all_urls>"]
     }
   ]
 }
