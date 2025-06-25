@@ -156,12 +156,6 @@ function applyPanelTheme(theme) {
 // --- THEME MANAGEMENT ---
 async function loadAllThemes() {
   let fileThemes = {};
-  try {
-    const response = await fetch(chrome.runtime.getURL("themes.json"));
-    fileThemes = await response.json();
-  } catch (e) {
-    console.log("No custom themes.json found or it's invalid. Skipping.");
-  }
 
   const { customThemes } = await chrome.storage.local.get({ customThemes: {} });
   return { ...BUILT_IN_THEMES, ...fileThemes, ...customThemes };
@@ -536,7 +530,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (headersToRemove.length === 0) {
       alert(
         chrome.i18n.getMessage("error_select_header") ||
-          "Please select at least one header to remove."
+        "Please select at least one header to remove."
       );
       return;
     }
@@ -548,7 +542,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (existingRules.some((rule) => rule.domain === domain)) {
       alert(
         chrome.i18n.getMessage("error_duplicate_rule") ||
-          "A rule for this domain already exists."
+        "A rule for this domain already exists."
       );
       return;
     }
@@ -570,7 +564,7 @@ document.addEventListener("DOMContentLoaded", () => {
           chrome.i18n.getMessage("confirm_delete_rule", [
             ruleToDelete.domain,
           ]) ||
-            `Are you sure you want to delete the rule for ${ruleToDelete.domain}?`
+          `Are you sure you want to delete the rule for ${ruleToDelete.domain}?`
         )
       ) {
         const updatedRules = existingRules.filter(

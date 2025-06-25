@@ -77,12 +77,6 @@ let THEMES = { ...BUILT_IN_THEMES };
 
 async function loadThemes() {
   let fileThemes = {};
-  try {
-    const response = await fetch(chrome.runtime.getURL("themes.json"));
-    fileThemes = await response.json();
-  } catch (error) {
-    console.log("No custom themes.json found or it's invalid. Skipping.");
-  }
 
   const { customThemes } = await chrome.storage.local.get({ customThemes: {} });
   THEMES = { ...BUILT_IN_THEMES, ...fileThemes, ...customThemes };
@@ -246,11 +240,11 @@ function createPreviewWindow() {
     </style>
     <div id="link-peeker-controls" class="controls-container">
        <button id="link-peeker-open" class="button control-button" title="${chrome.i18n.getMessage(
-         "openInNewTab"
-       )}"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></span></button>
+    "openInNewTab"
+  )}"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></span></button>
        <button id="link-peeker-close" class="button control-button" title="${chrome.i18n.getMessage(
-         "closePreview"
-       )}"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></span></button>
+    "closePreview"
+  )}"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></span></button>
     </div>
     <div class="box">
       <div class="iframe-container">

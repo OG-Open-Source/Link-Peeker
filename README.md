@@ -74,7 +74,6 @@ Link Peeker features a robust theme system.
 - **Importing/Exporting:**
   - **Import:** Click "Import from JSON" to load a theme file from your computer.
   - **Export:** Select one of your custom themes from the dropdown and click "Export to JSON" to save it as a file.
-- **`themes.json` file:** This file in the project root can be used to bundle additional, shareable themes with the extension.
 
 ## Glossary
 
@@ -94,8 +93,6 @@ Link Peeker features a robust theme system.
 ## License
 
 This repository is licensed under the [MIT License](https://opensource.org/licenses/mit-license.php).
-
-Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
 
 ---
 
