@@ -285,5 +285,11 @@
   },
   "navAdvanced": {
     "message": "Advanced"
+  },
+  "openInNewTab": {
+    "message": "Open in New Tab"
+  },
+  "closePreview": {
+    "message": "Close"
   }
 }

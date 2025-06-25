@@ -285,5 +285,11 @@
   },
   "navAdvanced": {
     "message": "進階設定"
+  },
+  "openInNewTab": {
+    "message": "在新分頁中開啟"
+  },
+  "closePreview": {
+    "message": "關閉"
   }
 }

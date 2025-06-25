@@ -101,10 +101,6 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
   }
 });
 
-const gsapScript = document.createElement("script");
-gsapScript.src = chrome.runtime.getURL("assets/lib/gsap.min.js");
-document.head.appendChild(gsapScript);
-
 function createPreviewWindow() {
   const existingWindow = document.getElementById("link-peeker-host");
   if (existingWindow) existingWindow.remove();
@@ -119,20 +115,21 @@ function createPreviewWindow() {
     zIndex: "2147483647",
     opacity: "0",
     visibility: "hidden",
+    transition: "opacity 0.2s ease, transform 0.2s ease",
   });
 
   const shadowRoot = hostEl.attachShadow({ mode: "open" });
   shadowRoot.innerHTML = `
-    <style>
-      :host {
-        --box-bg: rgba(30, 30, 30, 0.75);
-        --box-border: #424242;
-        --button-bg: rgba(45, 45, 45, 0.7);
-        --button-hover-bg: rgba(60, 60, 60, 0.9);
-        --primary-text-color: #f5f5f5;
-        --secondary-text-color: #bbbbbb;
-        --error-color: #ff5252;
-      }
+  <style>
+    :host {
+      --box-bg: rgba(30, 30, 30, 0.75);
+      --box-border: #424242;
+      --button-bg: rgba(45, 45, 45, 0.7);
+      --button-hover-bg: rgba(60, 60, 60, 0.9);
+      --primary-text-color: #f5f5f5;
+      --secondary-text-color: #bbbbbb;
+      --error-color: #ff5252;
+    }
       .box {
         box-sizing: border-box;
         -webkit-backdrop-filter: blur(5px);
@@ -248,8 +245,12 @@ function createPreviewWindow() {
       }
     </style>
     <div id="link-peeker-controls" class="controls-container">
-       <button id="link-peeker-open" class="button control-button" title="Open in New Tab"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 19H6C5.45 19 5 18.55 5 18V6C5 5.45 5.45 5 6 5H11V7H7V17H17V13H19V18C19 18.55 18.55 19 18 19ZM14 4V6H16.59L7.76 14.83L9.17 16.24L18 7.41V10H20V4H14Z"></path></svg></span></button>
-       <button id="link-peeker-close" class="button control-button" title="Close"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"></path></svg></span></button>
+       <button id="link-peeker-open" class="button control-button" title="${chrome.i18n.getMessage(
+         "openInNewTab"
+       )}"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></span></button>
+       <button id="link-peeker-close" class="button control-button" title="${chrome.i18n.getMessage(
+         "closePreview"
+       )}"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></span></button>
     </div>
     <div class="box">
       <div class="iframe-container">
@@ -343,6 +344,7 @@ document.addEventListener(
       backgroundColor: "rgba(0, 0, 0, 0.5)",
       zIndex: "2147483646",
       opacity: "0",
+      transition: "opacity 0.2s ease",
     });
     document.body.appendChild(overlay);
     document.body.style.overflow = "hidden";
@@ -352,44 +354,26 @@ document.addEventListener(
     applyAppearance(previewWindow);
 
     const showAnimation = () => {
-      if (typeof gsap !== "undefined") {
-        gsap.to([previewHost, overlay], {
-          duration: 0.4,
-          opacity: 1,
-          scale: 1,
-          visibility: "visible",
-          ease: "power3.out",
-        });
-      } else {
-        Object.assign(previewHost.style, {
-          opacity: "1",
-          visibility: "visible",
-          transform: "translate(-50%, -50%) scale(1)",
-        });
+      requestAnimationFrame(() => {
+        previewHost.style.opacity = "1";
+        previewHost.style.visibility = "visible";
+        previewHost.style.transform = "translate(-50%, -50%) scale(1)";
         overlay.style.opacity = "1";
-      }
+      });
     };
 
-    setTimeout(showAnimation, 50);
+    setTimeout(showAnimation, 20); // Small delay to ensure styles are applied
 
     const closeWindow = () => {
-      if (typeof gsap !== "undefined") {
-        gsap.to([previewHost, overlay], {
-          duration: 0.3,
-          opacity: 0,
-          scale: 0.9,
-          ease: "power3.in",
-          onComplete: () => {
-            previewHost?.remove();
-            overlay?.remove();
-            document.body.style.overflow = "";
-          },
-        });
-      } else {
+      previewHost.style.opacity = "0";
+      previewHost.style.transform = "translate(-50%, -50%) scale(0.9)";
+      overlay.style.opacity = "0";
+
+      setTimeout(() => {
         previewHost?.remove();
         overlay?.remove();
         document.body.style.overflow = "";
-      }
+      }, 300); // Match CSS transition duration
     };
 
     previewWindow
