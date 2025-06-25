@@ -39,242 +39,304 @@
           <!-- General Settings -->
           <div id="general-section" class="content-section is-active">
             <h1 class="title" data-i18n="navGeneral"></h1>
-            <div class="field">
-              <label class="label" data-i18n="triggerKeyLabel"></label>
-              <div class="control">
-                <div class="select">
-                  <select id="triggerKey">
-                    <option value="Alt" data-i18n="triggerKeyAlt"></option>
-                    <option value="Ctrl" data-i18n="triggerKeyCtrl"></option>
-                    <option value="Shift" data-i18n="triggerKeyShift"></option>
-                  </select>
+            <details class="config-section" open>
+              <summary>
+                <span class="icon-wrapper">
+                  <i data-lucide="chevron-right" class="unchecked-icon"></i>
+                  <i data-lucide="chevron-down" class="checked-icon"></i>
+                </span>
+                <span data-i18n="triggerKeyLabel"></span>
+              </summary>
+              <div class="config-options">
+                <div class="field">
+                  <div class="control">
+                    <div class="select">
+                      <select id="triggerKey">
+                        <option value="Alt" data-i18n="triggerKeyAlt"></option>
+                        <option value="Ctrl" data-i18n="triggerKeyCtrl"></option>
+                        <option value="Shift" data-i18n="triggerKeyShift"></option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </details>
           </div>
 
           <!-- Appearance Settings -->
           <div id="appearance-section" class="content-section">
             <h1 class="title" data-i18n="navAppearance"></h1>
-            <div class="field">
-              <label class="label" data-i18n="themeLabel"></label>
-              <div class="control">
-                <div class="select">
-                  <select id="theme">
-                    <option value="light" data-i18n="themeLight"></option>
-                    <option value="dark" data-i18n="themeDark"></option>
-                  </select>
+            <details class="config-section" open>
+              <summary>
+                <span class="icon-wrapper">
+                  <i data-lucide="chevron-right" class="unchecked-icon"></i>
+                  <i data-lucide="chevron-down" class="checked-icon"></i>
+                </span>
+                <span data-i18n="themeLabel"></span>
+              </summary>
+              <div class="config-options">
+                <div class="field">
+                  <div class="control">
+                    <div class="select">
+                      <select id="theme">
+                        <option value="light" data-i18n="themeLight"></option>
+                        <option value="dark" data-i18n="themeDark"></option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </details>
 
-            <!-- Theme Customization -->
-            <h2 class="subtitle" data-i18n="themeCustomizationTitle"></h2>
-            <div class="field">
-              <button class="button" id="add-theme-btn" data-i18n="addNewTheme"></button>
-            </div>
-
-            <form id="theme-editor" class="is-hidden box">
-              <input type="hidden" id="theme-id-input" />
-              <div class="field">
-                <label class="label" data-i18n="themeName"></label>
-                <div class="control">
-                  <input class="input" type="text" id="theme-name-input" required />
+            <details class="config-section">
+              <summary>
+                <span class="icon-wrapper">
+                  <i data-lucide="chevron-right" class="unchecked-icon"></i>
+                  <i data-lucide="chevron-down" class="checked-icon"></i>
+                </span>
+                <span data-i18n="themeCustomizationTitle"></span>
+              </summary>
+              <div class="config-options">
+                <div class="field">
+                  <button class="button" id="add-theme-btn" data-i18n="addNewTheme"></button>
                 </div>
+                <form id="theme-editor" class="is-hidden box">
+                  <input type="hidden" id="theme-id-input" />
+                  <div class="field">
+                    <label class="label" data-i18n="themeName"></label>
+                    <div class="control">
+                      <input class="input" type="text" id="theme-name-input" required />
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="checkbox">
+                      <input type="checkbox" id="theme-blurEnabled-input" />
+                      <span class="icon-wrapper"><i data-lucide="square" class="unchecked-icon"></i><i
+                          data-lucide="check-square" class="checked-icon"></i></span>
+                      <span data-i18n="blurEnabled"></span>
+                    </label>
+                  </div>
+                  <div class="field">
+                    <label class="label" data-i18n="blurAmount"></label>
+                    <div class="control">
+                      <input class="slider is-fullwidth" type="range" min="0" max="20" value="5"
+                        id="theme-blurAmount-input" />
+                    </div>
+                  </div>
+                  <div class="columns is-multiline">
+                    <div class="column is-half">
+                      <div class="field">
+                        <label class="label" data-i18n="boxBgColor"></label>
+                        <div class="control">
+                          <input class="input" type="color" id="theme-boxBg-input" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column is-half">
+                      <div class="field">
+                        <label class="label" data-i18n="borderColor"></label>
+                        <div class="control">
+                          <input class="input" type="color" id="theme-border-input" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column is-half">
+                      <div class="field">
+                        <label class="label" data-i18n="buttonBgColor"></label>
+                        <div class="control">
+                          <input class="input" type="color" id="theme-buttonBg-input" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column is-half">
+                      <div class="field">
+                        <label class="label" data-i18n="buttonHoverBgColor"></label>
+                        <div class="control">
+                          <input class="input" type="color" id="theme-buttonHoverBg-input" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column is-half">
+                      <div class="field">
+                        <label class="label" data-i18n="primaryTextColor"></label>
+                        <div class="control">
+                          <input class="input" type="color" id="theme-primaryTextColor-input" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column is-half">
+                      <div class="field">
+                        <label class="label" data-i18n="secondaryTextColor"></label>
+                        <div class="control">
+                          <input class="input" type="color" id="theme-secondaryTextColor-input" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column is-half">
+                      <div class="field">
+                        <label class="label" data-i18n="errorColor"></label>
+                        <div class="control">
+                          <input class="input" type="color" id="theme-errorColor-input" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field is-grouped">
+                    <div class="control">
+                      <button type="submit" class="button is-link" id="save-theme-btn" data-i18n="saveTheme"></button>
+                    </div>
+                    <div class="control">
+                      <button type="button" class="button" id="cancel-edit-btn" data-i18n="cancel"></button>
+                    </div>
+                    <div class="control">
+                      <button type="button" class="button is-info" id="import-theme-btn"
+                        data-i18n="importTheme"></button>
+                      <input type="file" id="import-theme-input" class="is-hidden" accept=".json" />
+                    </div>
+                    <div class="control">
+                      <button type="button" class="button is-warning" id="export-theme-btn"
+                        data-i18n="exportTheme"></button>
+                    </div>
+                    <div class="control">
+                      <button type="button" class="button is-danger" id="delete-theme-btn"
+                        data-i18n="deleteTheme"></button>
+                    </div>
+                  </div>
+                </form>
               </div>
-              <div class="field">
-                <label class="checkbox">
-                  <input type="checkbox" id="theme-blurEnabled-input" />
-                  <span data-i18n="blurEnabled"></span>
-                </label>
-              </div>
-              <div class="field">
-                <label class="label" data-i18n="blurAmount"></label>
-                <div class="control">
-                  <input class="slider is-fullwidth" type="range" min="0" max="20" value="5"
-                    id="theme-blurAmount-input" />
-                </div>
-              </div>
-
-              <div class="columns is-multiline">
-                <div class="column is-half">
-                  <div class="field">
-                    <label class="label" data-i18n="boxBgColor"></label>
-                    <div class="control">
-                      <input class="input" type="color" id="theme-boxBg-input" />
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div class="field">
-                    <label class="label" data-i18n="borderColor"></label>
-                    <div class="control">
-                      <input class="input" type="color" id="theme-border-input" />
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div class="field">
-                    <label class="label" data-i18n="buttonBgColor"></label>
-                    <div class="control">
-                      <input class="input" type="color" id="theme-buttonBg-input" />
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div class="field">
-                    <label class="label" data-i18n="buttonHoverBgColor"></label>
-                    <div class="control">
-                      <input class="input" type="color" id="theme-buttonHoverBg-input" />
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div class="field">
-                    <label class="label" data-i18n="primaryTextColor"></label>
-                    <div class="control">
-                      <input class="input" type="color" id="theme-primaryTextColor-input" />
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div class="field">
-                    <label class="label" data-i18n="secondaryTextColor"></label>
-                    <div class="control">
-                      <input class="input" type="color" id="theme-secondaryTextColor-input" />
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div class="field">
-                    <label class="label" data-i18n="errorColor"></label>
-                    <div class="control">
-                      <input class="input" type="color" id="theme-errorColor-input" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="field is-grouped">
-                <div class="control">
-                  <button type="submit" class="button is-link" id="save-theme-btn" data-i18n="saveTheme"></button>
-                </div>
-                <div class="control">
-                  <button type="button" class="button" id="cancel-edit-btn" data-i18n="cancel"></button>
-                </div>
-                <div class="control">
-                  <button type="button" class="button is-info" id="import-theme-btn" data-i18n="importTheme"></button>
-                  <input type="file" id="import-theme-input" class="is-hidden" accept=".json" />
-                </div>
-                <div class="control">
-                  <button type="button" class="button is-warning" id="export-theme-btn"
-                    data-i18n="exportTheme"></button>
-                </div>
-                <div class="control">
-                  <button type="button" class="button is-danger" id="delete-theme-btn" data-i18n="deleteTheme"></button>
-                </div>
-              </div>
-            </form>
+            </details>
           </div>
 
           <!-- Rules Settings -->
           <div id="rules-section" class="content-section">
             <h1 class="title" data-i18n="navRules"></h1>
-            <h3 class="subtitle" data-i18n="customRulesTitle">
-              Custom Rules
-            </h3>
-            <div class="box">
-              <form id="add-rule-form">
-                <div class="field is-horizontal">
-                  <div class="field-label is-normal">
-                    <label class="label" data-i18n="domainLabel">Domain</label>
-                  </div>
-                  <div class="field-body">
-                    <div class="field">
-                      <p class="control is-expanded">
-                        <input class="input" type="text" id="rule-domain-input" placeholder="e.g., example.com"
-                          required />
-                      </p>
+            <details class="config-section" open>
+              <summary>
+                <span class="icon-wrapper">
+                  <i data-lucide="chevron-right" class="unchecked-icon"></i>
+                  <i data-lucide="chevron-down" class="checked-icon"></i>
+                </span>
+                <span data-i18n="customRulesTitle"></span>
+              </summary>
+              <div class="config-options">
+                <form id="add-rule-form">
+                  <input type="hidden" id="rule-index-input" value="-1" />
+                  <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                      <label class="label" data-i18n="domainLabel">Domain</label>
                     </div>
-                  </div>
-                </div>
-                <div class="field is-horizontal">
-                  <div class="field-label">
-                    <label class="label" data-i18n="headersToRemoveLabel">Headers to Remove</label>
-                  </div>
-                  <div class="field-body">
-                    <div class="field">
-                      <div class="control">
-                        <label class="checkbox">
-                          <input type="checkbox" id="rule-remove-csp" />
-                          Content-Security-Policy
-                        </label>
-                        <label class="checkbox">
-                          <input type="checkbox" id="rule-remove-xfo" />
-                          X-Frame-Options
-                        </label>
+                    <div class="field-body">
+                      <div class="field">
+                        <p class="control is-expanded">
+                          <input class="input" type="text" id="rule-domain-input" placeholder="e.g., example.com"
+                            required />
+                        </p>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="field is-horizontal">
-                  <div class="field-label">
-                    <!-- Left empty for spacing -->
-                  </div>
-                  <div class="field-body">
-                    <div class="field">
-                      <div class="control">
-                        <button type="submit" class="button is-primary" data-i18n="addRuleBtn">
-                          Add Rule
-                        </button>
+                  <div class="field is-horizontal">
+                    <div class="field-label">
+                      <label class="label" data-i18n="headersToRemoveLabel">Headers to Remove</label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <label class="checkbox">
+                            <input type="checkbox" id="rule-remove-csp" />
+                            <span class="icon-wrapper"><i data-lucide="square" class="unchecked-icon"></i><i
+                                data-lucide="check-square" class="checked-icon"></i></span>
+                            <span class="option-text">Content-Security-Policy</span>
+                          </label>
+                          <label class="checkbox">
+                            <input type="checkbox" id="rule-remove-xfo" />
+                            <span class="icon-wrapper"><i data-lucide="square" class="unchecked-icon"></i><i
+                                data-lucide="check-square" class="checked-icon"></i></span>
+                            <span class="option-text">X-Frame-Options</span>
+                          </label>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </form>
-            </div>
+                  <div class="field is-horizontal">
+                    <div class="field-label">
+                      <!-- Left empty for spacing -->
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <button type="submit" class="button is-primary" data-i18n="addRuleBtn">
+                            Add Rule
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </details>
 
-            <h3 class="subtitle is-5" data-i18n="activeRulesTitle">
-              Active Custom Rules
-            </h3>
-            <table class="table is-fullwidth is-striped is-hoverable">
-              <thead>
-                <tr>
-                  <th data-i18n="domainHeader">Domain</th>
-                  <th data-i18n="removedHeadersHeader">Removed Headers</th>
-                  <th><!-- Action column --></th>
-                </tr>
-              </thead>
-              <tbody id="custom-rules-table-body">
-                <!-- Rules will be dynamically inserted here -->
-              </tbody>
-            </table>
+            <details class="config-section" open>
+              <summary>
+                <span class="icon-wrapper">
+                  <i data-lucide="chevron-right" class="unchecked-icon"></i>
+                  <i data-lucide="chevron-down" class="checked-icon"></i>
+                </span>
+                <span data-i18n="activeRulesTitle"></span>
+              </summary>
+              <div class="config-options">
+                <table class="table is-fullwidth is-striped is-hoverable">
+                  <thead>
+                    <tr>
+                      <th data-i18n="domainHeader">Domain</th>
+                      <th data-i18n="removedHeadersHeader">Removed Headers</th>
+                      <th data-i18n="actionsHeader">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="custom-rules-table-body">
+                    <!-- Rules will be dynamically inserted here -->
+                  </tbody>
+                </table>
+              </div>
+            </details>
           </div>
 
           <!-- Advanced Settings -->
           <div id="advanced-section" class="content-section">
             <h1 class="title" data-i18n="navAdvanced"></h1>
-            <h2 class="subtitle" data-i18n="iframeConfigTitle"></h2>
-
-            <!-- Sandbox Permissions -->
             <details class="config-section">
-              <summary data-i18n="sandboxLabel"></summary>
+              <summary>
+                <span class="icon-wrapper">
+                  <i data-lucide="chevron-right" class="unchecked-icon"></i>
+                  <i data-lucide="chevron-down" class="checked-icon"></i>
+                </span>
+                <span data-i18n="sandboxLabel"></span>
+              </summary>
               <div class="config-options" id="sandbox-options">
                 <!-- Options will be dynamically inserted here -->
               </div>
             </details>
 
-            <!-- Feature Policy (Allow) -->
             <details class="config-section">
-              <summary data-i18n="featurePolicyLabel"></summary>
+              <summary>
+                <span class="icon-wrapper">
+                  <i data-lucide="chevron-right" class="unchecked-icon"></i>
+                  <i data-lucide="chevron-down" class="checked-icon"></i>
+                </span>
+                <span data-i18n="featurePolicyLabel"></span>
+              </summary>
               <div class="config-options" id="allow-options">
                 <!-- Options will be dynamically inserted here -->
               </div>
             </details>
 
-            <!-- Referrer Policy -->
             <details class="config-section">
-              <summary data-i18n="referrerPolicyLabel"></summary>
+              <summary>
+                <span class="icon-wrapper">
+                  <i data-lucide="chevron-right" class="unchecked-icon"></i>
+                  <i data-lucide="chevron-down" class="checked-icon"></i>
+                </span>
+                <span data-i18n="referrerPolicyLabel"></span>
+              </summary>
               <div class="config-options" id="referrer-policy-options">
                 <!-- Options will be dynamically inserted here -->
               </div>
@@ -284,6 +346,7 @@
       </div>
     </div>
   </section>
+  <script src="assets/lib/lucide.min.js"></script>
   <script src="main.js"></script>
 </body>
 

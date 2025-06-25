@@ -127,7 +127,7 @@ function applyTranslations() {
 
 function createPolicyOption(type, key, i18nKey, container) {
   const label = document.createElement("label");
-  label.className = type;
+  label.className = type; // e.g., "checkbox" or "radio"
 
   const input = document.createElement("input");
   input.type = type;
@@ -137,14 +137,23 @@ function createPolicyOption(type, key, i18nKey, container) {
     input.value = key;
   }
 
-  const span = document.createElement("span");
-  span.className = "option-text";
+  const iconWrapper = document.createElement("span");
+  iconWrapper.className = "icon-wrapper";
 
+  if (type === "checkbox") {
+    iconWrapper.innerHTML = `<i data-lucide="square" class="unchecked-icon"></i><i data-lucide="check-square" class="checked-icon"></i>`;
+  } else if (type === "radio") {
+    iconWrapper.innerHTML = `<i data-lucide="circle" class="unchecked-icon"></i><i data-lucide="check-circle" class="checked-icon"></i>`;
+  }
+
+  const textSpan = document.createElement("span");
+  textSpan.className = "option-text";
   const plainText = chrome.i18n.getMessage(i18nKey) || i18nKey;
-  span.textContent = `${plainText} (${key})`;
+  textSpan.textContent = `${plainText} (${key})`;
 
   label.appendChild(input);
-  label.appendChild(span);
+  label.appendChild(iconWrapper);
+  label.appendChild(textSpan);
   container.appendChild(label);
 }
 
@@ -246,6 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ruleRemoveCsp: document.getElementById("rule-remove-csp"),
     ruleRemoveXfo: document.getElementById("rule-remove-xfo"),
     customRulesTableBody: document.getElementById("custom-rules-table-body"),
+    ruleIndexInput: document.getElementById("rule-index-input"),
   };
 
   let allThemes = {};
@@ -306,6 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (radio) radio.checked = true;
 
     renderCustomRules(settings.customRules || []);
+    lucide.createIcons();
   });
 
   // --- EVENT LISTENERS ---
@@ -502,12 +513,23 @@ document.addEventListener("DOMContentLoaded", () => {
       row.innerHTML = `
         <td>${rule.domain}</td>
         <td>${headers}</td>
-        <td class="has-text-right">
-          <button class="button is-danger is-small delete-rule-btn" data-index="${index}" data-i18n="deleteRuleBtn">Delete</button>
+        <td class="action-buttons">
+          <button class="button is-small edit-rule-btn" data-index="${index}" title="${chrome.i18n.getMessage(
+        "editRuleBtn"
+      )}">
+            <i data-lucide="square-pen"></i>
+          </button>
+          <button class="button is-danger is-small delete-rule-btn" data-index="${index}" title="${chrome.i18n.getMessage(
+        "deleteRuleBtn"
+      )}">
+            <i data-lucide="trash-2"></i>
+          </button>
         </td>
       `;
       elements.customRulesTableBody.appendChild(row);
     });
+    lucide.createIcons();
+    applyTranslations();
   }
 
   async function updateCustomRules(newRules) {
@@ -525,7 +547,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const headersToRemove = [];
     if (elements.ruleRemoveCsp.checked)
       headersToRemove.push("Content-Security-Policy");
-    if (elements.ruleRemoveXfo.checked) headersToRemove.push("X-Frame-Options");
+    if (elements.ruleRemoveXfo.checked)
+      headersToRemove.push("X-Frame-Options");
 
     if (headersToRemove.length === 0) {
       alert(
@@ -537,37 +560,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const newRule = { domain, headersToRemove };
     const existingRules = currentSettings.customRules || [];
+    const ruleIndex = parseInt(elements.ruleIndexInput.value, 10);
 
-    // Check for duplicates
-    if (existingRules.some((rule) => rule.domain === domain)) {
-      alert(
-        chrome.i18n.getMessage("error_duplicate_rule") ||
-        "A rule for this domain already exists."
-      );
-      return;
+    if (ruleIndex > -1) {
+      // Editing existing rule
+      existingRules[ruleIndex] = newRule;
+      await updateCustomRules(existingRules);
+    } else {
+      // Adding new rule
+      if (existingRules.some((rule) => rule.domain === domain)) {
+        alert(
+          chrome.i18n.getMessage("error_duplicate_rule") ||
+          "A rule for this domain already exists."
+        );
+        return;
+      }
+      const updatedRules = [...existingRules, newRule];
+      await updateCustomRules(updatedRules);
     }
 
-    const updatedRules = [...existingRules, newRule];
-    await updateCustomRules(updatedRules);
-
     elements.addRuleForm.reset();
+    elements.ruleIndexInput.value = "-1";
   });
 
   elements.customRulesTableBody.addEventListener("click", async (e) => {
-    if (e.target.classList.contains("delete-rule-btn")) {
-      const indexToDelete = parseInt(e.target.dataset.index, 10);
-      const existingRules = currentSettings.customRules || [];
-      const ruleToDelete = existingRules[indexToDelete];
+    const editButton = e.target.closest(".edit-rule-btn");
+    const deleteButton = e.target.closest(".delete-rule-btn");
+
+    if (editButton) {
+      const indexToEdit = parseInt(editButton.dataset.index, 10);
+      const ruleToEdit = currentSettings.customRules[indexToEdit];
+
+      elements.ruleDomainInput.value = ruleToEdit.domain;
+      elements.ruleRemoveCsp.checked =
+        ruleToEdit.headersToRemove.includes("Content-Security-Policy");
+      elements.ruleRemoveXfo.checked =
+        ruleToEdit.headersToRemove.includes("X-Frame-Options");
+      elements.ruleIndexInput.value = indexToEdit;
+
+      // Focus the form
+      elements.ruleDomainInput.focus();
+    }
+
+    if (deleteButton) {
+      const indexToDelete = parseInt(deleteButton.dataset.index, 10);
+      const ruleToDelete = currentSettings.customRules[indexToDelete];
 
       if (
         confirm(
-          chrome.i18n.getMessage("confirm_delete_rule", [
-            ruleToDelete.domain,
-          ]) ||
+          chrome.i18n.getMessage("confirm_delete_rule", [ruleToDelete.domain]) ||
           `Are you sure you want to delete the rule for ${ruleToDelete.domain}?`
         )
       ) {
-        const updatedRules = existingRules.filter(
+        const updatedRules = currentSettings.customRules.filter(
           (_, index) => index !== indexToDelete
         );
         await updateCustomRules(updatedRules);
