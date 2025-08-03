@@ -12,14 +12,35 @@ permissions:
   contents: write # Needed to create releases and upload assets
 
 jobs:
+  check_build_file:
+    name: Check for build-assets.yml
+    runs-on: ubuntu-latest
+    outputs:
+      exists: ${{ steps.check_file.outputs.exists }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Check if build-assets.yml exists
+        id: check_file
+        run: |
+          if [ -f ".github/workflows/build-assets.yml" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
   build:
     name: Build Release Assets
+    if: needs.check_build_file.outputs.exists == 'true'
+    needs: check_build_file
     uses: ./.github/workflows/build-assets.yml
 
   release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
-    needs: build
+    needs: [check_build_file, build]
+    if: always() # This job should run even if the build job is skipped
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -56,16 +77,26 @@ jobs:
           echo "changelog_path=changelog.md" >> $GITHUB_OUTPUT
 
       - name: Download build assets
+        id: download_assets
+        if: needs.build.result == 'success'
         uses: actions/download-artifact@v4
         with:
           name: release-assets
           path: release-assets
 
-      - name: Create GitHub Release and Upload Assets
+      - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create ${{ github.ref_name }} \
-            --title "${{ github.event.repository.name }} ${{ github.ref_name }}" \
-            --notes-file ${{ steps.generate_changelog.outputs.changelog_path }} \
-            release-assets/*
+          if [ -d "release-assets" ] && [ "$(ls -A release-assets)" ]; then
+            echo "Assets found. Creating release and uploading assets."
+            gh release create ${{ github.ref_name }} \
+              --title "${{ github.event.repository.name }} ${{ github.ref_name }}" \
+              --notes-file ${{ steps.generate_changelog.outputs.changelog_path }} \
+              release-assets/*
+          else
+            echo "No assets found. Creating release without assets."
+            gh release create ${{ github.ref_name }} \
+              --title "${{ github.event.repository.name }} ${{ github.ref_name }}" \
+              --notes-file ${{ steps.generate_changelog.outputs.changelog_path }}
+          fi
