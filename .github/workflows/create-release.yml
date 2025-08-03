@@ -12,40 +12,37 @@ permissions:
   contents: write # Needed to create releases and upload assets
 
 jobs:
-  check_build_file:
-    name: Check for build-assets.yml
-    runs-on: ubuntu-latest
-    outputs:
-      exists: ${{ steps.check_file.outputs.exists }}
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Check if build-assets.yml exists
-        id: check_file
-        run: |
-          if [ -f ".github/workflows/build-assets.yml" ]; then
-            echo "exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "exists=false" >> $GITHUB_OUTPUT
-          fi
-
-  build:
-    name: Build Release Assets
-    if: needs.check_build_file.outputs.exists == 'true'
-    needs: check_build_file
-    uses: ./.github/workflows/build-assets.yml
-
   release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
-    needs: [check_build_file, build]
-    if: always() # This job should run even if the build job is skipped
-
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Required to fetch all history for git log
+
+      - name: Check for pyproject.toml
+        id: check_pyproject
+        run: |
+          if [ -f "pyproject.toml" ]; then
+            echo "found=true" >> $GITHUB_OUTPUT
+          else
+            echo "found=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set up Python
+        if: steps.check_pyproject.outputs.found == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install build dependencies
+        if: steps.check_pyproject.outputs.found == 'true'
+        run: python -m pip install build
+
+      - name: Build distributions
+        if: steps.check_pyproject.outputs.found == 'true'
+        run: python -m build
 
       - name: Generate Changelog and Release Body
         id: generate_changelog
@@ -76,24 +73,16 @@ jobs:
 
           echo "changelog_path=changelog.md" >> $GITHUB_OUTPUT
 
-      - name: Download build assets
-        id: download_assets
-        if: needs.build.result == 'success'
-        uses: actions/download-artifact@v4
-        with:
-          name: release-assets
-          path: release-assets
-
       - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [ -d "release-assets" ] && [ "$(ls -A release-assets)" ]; then
+          if [ -d "dist" ] && [ "$(ls -A dist)" ]; then
             echo "Assets found. Creating release and uploading assets."
             gh release create ${{ github.ref_name }} \
               --title "${{ github.event.repository.name }} ${{ github.ref_name }}" \
               --notes-file ${{ steps.generate_changelog.outputs.changelog_path }} \
-              release-assets/*
+              dist/*
           else
             echo "No assets found. Creating release without assets."
             gh release create ${{ github.ref_name }} \
