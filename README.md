@@ -6,16 +6,19 @@ Link Peeker is a Chromium extension for quick, interactive link previews without
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [Introduction](#introduction)
 - [Features](#features)
 - [Installation Guide](#installation-guide)
 - [Usage](#usage)
 - [Theme Customization](#theme-customization)
 - [Glossary](#glossary)
+- [Contributors](#contributors)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Overview
+---
+
+## Introduction
 
 Link Peeker is a powerful Chromium extension designed to boost your browsing productivity. It allows you to preview the full, interactive content of any hyperlink in an elegant, centered, non-intrusive pop-up window without navigating away from your current page.
 
@@ -82,6 +85,12 @@ Link Peeker features a robust theme system.
 - **Shadow DOM:** A web standard used for CSS encapsulation. It creates a "shadow root" for an element, isolating its styles and structure from the main document's DOM.
 - **sandbox (iframe attribute):** A security feature that applies a set of restrictions to the content within an `<iframe>`.
 - **allow (iframe attribute):** A Feature Policy mechanism that allows you to selectively enable specific browser features within the `<iframe>`.
+
+## Contributors
+
+<a href="https://github.com/OG-Open-Source/ Link-Peeker/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=OG-Open-Source/Link-Peeker" />
+</a>
 
 ## Contributing
 

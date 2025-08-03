@@ -1,0 +1,71 @@
+# This workflow creates a new GitHub Release when a tag is pushed.
+# It automatically generates a changelog and can optionally attach assets built by the `build-assets.yml` workflow.
+
+name: Create GitHub Release
+
+on:
+  push:
+    tags:
+      - "v*" # Trigger on tags like v1.0, v1.2.3
+
+permissions:
+  contents: write # Needed to create releases and upload assets
+
+jobs:
+  build:
+    name: Build Release Assets
+    uses: ./.github/workflows/build-assets.yml
+
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required to fetch all history for git log
+
+      - name: Generate Changelog and Release Body
+        id: generate_changelog
+        run: |
+          # Get the previous tag. If there's no previous tag, this will be empty.
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 `git rev-list --tags --skip=1 --max-count=1` || echo "")
+
+          # Generate the list of commit summaries
+          if [ -z "$PREVIOUS_TAG" ]; then
+            echo "No previous tag found. Creating changelog from the first commit."
+            CHANGELOG=$(git log ${{ github.ref_name }} --pretty=format:'* %s (`%h`)')
+            # Generate the Full Changelog URL for the first release
+            FULL_CHANGELOG_URL="https://github.com/${{ github.repository }}/commits/${{ github.ref_name }}"
+          else
+            echo "Generating changelog from $PREVIOUS_TAG to ${{ github.ref_name }}"
+            CHANGELOG=$(git log $PREVIOUS_TAG...${{ github.ref_name }} --pretty=format:'* %s (`%h`)')
+            # Generate the Full Changelog URL for subsequent releases
+            FULL_CHANGELOG_URL="https://github.com/${{ github.repository }}/compare/$PREVIOUS_TAG...${{ github.ref_name }}"
+          fi
+
+          # Combine all parts into the final release body file
+          cat <<EOF > changelog.md
+          ### What's Changed
+          ${CHANGELOG}
+
+          **Full Changelog**: ${FULL_CHANGELOG_URL}
+          EOF
+
+          echo "changelog_path=changelog.md" >> $GITHUB_OUTPUT
+
+      - name: Download build assets
+        uses: actions/download-artifact@v4
+        with:
+          name: release-assets
+          path: release-assets
+
+      - name: Create GitHub Release and Upload Assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create ${{ github.ref_name }} \
+            --title "${{ github.event.repository.name }} ${{ github.ref_name }}" \
+            --notes-file ${{ steps.generate_changelog.outputs.changelog_path }} \
+            release-assets/*
