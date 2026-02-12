@@ -1,197 +1,199 @@
 :root {
-  --risk-high: #ff3860;
-  --risk-medium: #ffdd57;
-  --risk-low: #48c78e;
-  --text-color: #4a4a4a;
-  --text-light-color: #7a7a7a;
-  --background-color: #ffffff;
-  --border-color: #dbdbdb;
-  --link-color: #3273dc;
+	--risk-high: #ff3860;
+	--risk-medium: #ffdd57;
+	--risk-low: #48c78e;
+	--text-color: #4a4a4a;
+	--text-light-color: #7a7a7a;
+	--background-color: #ffffff;
+	--border-color: #dbdbdb;
+	--link-color: #3273dc;
 }
 
-html[data-theme="dark"] {
-  --risk-high: #ff3860;
-  --risk-medium: #ffdd57;
-  --risk-low: #48c78e;
-  --text-color: #f5f5f5;
-  --text-light-color: #b5b5b5;
-  --background-color: #1c1c1e;
-  --border-color: #4a4a4a;
-  --link-color: #389bff;
+html[data-theme='dark'] {
+	--risk-high: #ff3860;
+	--risk-medium: #ffdd57;
+	--risk-low: #48c78e;
+	--text-color: #f5f5f5;
+	--text-light-color: #b5b5b5;
+	--background-color: #1c1c1e;
+	--border-color: #4a4a4a;
+	--link-color: #389bff;
 }
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
+	background-color: var(--background-color);
+	color: var(--text-color);
+	transition:
+		background-color 0.3s,
+		color 0.3s;
 }
 
 .title,
 .subtitle,
 .label {
-  color: var(--text-color) !important;
+	color: var(--text-color) !important;
 }
 
 .config-section {
-  margin-bottom: 1.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
+	margin-bottom: 1.5rem;
+	border: 1px solid var(--border-color);
+	border-radius: 6px;
+	padding: 0.75rem 1rem;
 }
 
 .config-section summary {
-  font-weight: bold;
-  cursor: pointer;
-  outline: none;
-  list-style: none; /* Hide default arrow */
-  display: flex;
-  align-items: center;
+	font-weight: bold;
+	cursor: pointer;
+	outline: none;
+	list-style: none; /* Hide default arrow */
+	display: flex;
+	align-items: center;
 }
 
 .config-section summary::-webkit-details-marker {
-  display: none; /* Hide default arrow for Chrome/Safari */
+	display: none; /* Hide default arrow for Chrome/Safari */
 }
 
 .config-section summary .icon-wrapper {
-  display: inline-flex;
-  align-items: center;
-  margin-right: 0.5rem;
+	display: inline-flex;
+	align-items: center;
+	margin-right: 0.5rem;
 }
 
 .config-section summary .checked-icon,
 .config-section[open] summary .unchecked-icon {
-  display: none;
+	display: none;
 }
 
 .config-section[open] summary .checked-icon {
-  display: inline-block;
+	display: inline-block;
 }
 
 .config-options {
-  margin-top: 0.75rem;
-  overflow: hidden;
+	margin-top: 0.75rem;
+	overflow: hidden;
 }
 
 .config-options h3 {
-  font-size: 0.9em;
-  font-weight: bold;
-  color: var(--text-light-color);
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.25rem;
+	font-size: 0.9em;
+	font-weight: bold;
+	color: var(--text-light-color);
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
+	border-bottom: 1px solid var(--border-color);
+	padding-bottom: 0.25rem;
 }
 
 .checkbox,
 .radio {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  margin-right: 1rem;
-  margin-bottom: 0.5rem;
-  vertical-align: middle;
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	margin-right: 1rem;
+	margin-bottom: 0.5rem;
+	vertical-align: middle;
 }
 
 .config-options .checkbox,
 .config-options .radio {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.75rem;
-  cursor: pointer;
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.75rem;
+	cursor: pointer;
 }
 
 .checkbox input,
 .radio input {
-  display: none; /* Hide original input */
+	display: none; /* Hide original input */
 }
 
 .icon-wrapper {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.5em;
-  height: 1.5em;
-  margin-right: 0.5em;
-  color: var(--text-color);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.5em;
+	height: 1.5em;
+	margin-right: 0.5em;
+	color: var(--text-color);
 }
 
 .checkbox .checked-icon,
 .radio .checked-icon,
 .checkbox input:checked ~ .icon-wrapper .unchecked-icon,
 .radio input:checked ~ .icon-wrapper .unchecked-icon {
-  display: none;
+	display: none;
 }
 
 .checkbox input:checked ~ .icon-wrapper .checked-icon,
 .radio input:checked ~ .icon-wrapper .checked-icon {
-  display: inline-block;
-  color: var(--link-color);
+	display: inline-block;
+	color: var(--link-color);
 }
 
 .risk-high::before,
 .risk-medium::before,
 .risk-low::before {
-  content: "●";
-  margin-right: 0.5em;
-  font-size: 0.8em;
+	content: '●';
+	margin-right: 0.5em;
+	font-size: 0.8em;
 }
 
 .risk-high::before {
-  color: var(--risk-high);
+	color: var(--risk-high);
 }
 .risk-medium::before {
-  color: var(--risk-medium);
+	color: var(--risk-medium);
 }
 .risk-low::before {
-  color: var(--risk-low);
+	color: var(--risk-low);
 }
 
 .option-text {
-  color: var(--text-color);
+	color: var(--text-color);
 }
 
 /* --- New Layout Styles --- */
 .main-layout {
-  margin-top: 1.5rem;
+	margin-top: 1.5rem;
 }
 
 .sidebar-menu {
-  position: sticky;
-  top: 1.5rem;
+	position: sticky;
+	top: 1.5rem;
 }
 
 .sidebar-menu .menu-label {
-  font-size: 1.1em;
-  font-weight: bold;
+	font-size: 1.1em;
+	font-weight: bold;
 }
 
 .sidebar-menu .menu-list li {
-  margin-bottom: 0.5em; /* Add spacing between menu items */
+	margin-bottom: 0.5em; /* Add spacing between menu items */
 }
 
 .content-section {
-  display: none;
+	display: none;
 }
 
 .content-section.is-active {
-  display: block;
+	display: block;
 }
 
 .menu-list a.is-active {
-  background-color: hsl(217, 71%, 53%);
-  color: #fff;
+	background-color: hsl(217, 71%, 53%);
+	color: #fff;
 }
 
 #theme-editor {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 .action-buttons {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: flex-end;
+	display: flex;
+	gap: 0.5rem;
+	justify-content: flex-end;
 }
 
 .action-buttons .button.is-small {
-  padding: 0.5em;
+	padding: 0.5em;
 }
