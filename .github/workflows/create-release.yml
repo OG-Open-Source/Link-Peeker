@@ -4,88 +4,88 @@
 name: Create GitHub Release
 
 on:
-  push:
-    tags:
-      - "v*" # Trigger on tags like v1.0, v1.2.3
+    push:
+        tags:
+            - 'v*' # Trigger on tags like v1.0, v1.2.3
 
 permissions:
-  contents: write # Needed to create releases and upload assets
+    contents: write # Needed to create releases and upload assets
 
 jobs:
-  release:
-    name: Create GitHub Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Required to fetch all history for git log
+    release:
+        name: Create GitHub Release
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0 # Required to fetch all history for git log
 
-      - name: Check for pyproject.toml
-        id: check_pyproject
-        run: |
-          if [ -f "pyproject.toml" ]; then
-            echo "found=true" >> $GITHUB_OUTPUT
-          else
-            echo "found=false" >> $GITHUB_OUTPUT
-          fi
+            - name: Check for pyproject.toml
+              id: check_pyproject
+              run: |
+                  if [ -f "pyproject.toml" ]; then
+                    echo "found=true" >> $GITHUB_OUTPUT
+                  else
+                    echo "found=false" >> $GITHUB_OUTPUT
+                  fi
 
-      - name: Set up Python
-        if: steps.check_pyproject.outputs.found == 'true'
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
+            - name: Set up Python
+              if: steps.check_pyproject.outputs.found == 'true'
+              uses: actions/setup-python@v5
+              with:
+                  python-version: '3.x'
 
-      - name: Install build dependencies
-        if: steps.check_pyproject.outputs.found == 'true'
-        run: python -m pip install build
+            - name: Install build dependencies
+              if: steps.check_pyproject.outputs.found == 'true'
+              run: python -m pip install build
 
-      - name: Build distributions
-        if: steps.check_pyproject.outputs.found == 'true'
-        run: python -m build
+            - name: Build distributions
+              if: steps.check_pyproject.outputs.found == 'true'
+              run: python -m build
 
-      - name: Generate Changelog and Release Body
-        id: generate_changelog
-        run: |
-          # Get the previous tag. If there's no previous tag, this will be empty.
-          PREVIOUS_TAG=$(git describe --tags --abbrev=0 `git rev-list --tags --skip=1 --max-count=1` || echo "")
+            - name: Generate Changelog and Release Body
+              id: generate_changelog
+              run: |
+                  # Get the previous tag. If there's no previous tag, this will be empty.
+                  PREVIOUS_TAG=$(git describe --tags --abbrev=0 `git rev-list --tags --skip=1 --max-count=1` || echo "")
 
-          # Generate the list of commit summaries
-          if [ -z "$PREVIOUS_TAG" ]; then
-            echo "No previous tag found. Creating changelog from the first commit."
-            CHANGELOG=$(git log ${{ github.ref_name }} --pretty=format:'* %s (`%h`)')
-            # Generate the Full Changelog URL for the first release
-            FULL_CHANGELOG_URL="https://github.com/${{ github.repository }}/commits/${{ github.ref_name }}"
-          else
-            echo "Generating changelog from $PREVIOUS_TAG to ${{ github.ref_name }}"
-            CHANGELOG=$(git log $PREVIOUS_TAG...${{ github.ref_name }} --pretty=format:'* %s (`%h`)')
-            # Generate the Full Changelog URL for subsequent releases
-            FULL_CHANGELOG_URL="https://github.com/${{ github.repository }}/compare/$PREVIOUS_TAG...${{ github.ref_name }}"
-          fi
+                  # Generate the list of commit summaries
+                  if [ -z "$PREVIOUS_TAG" ]; then
+                    echo "No previous tag found. Creating changelog from the first commit."
+                    CHANGELOG=$(git log ${{ github.ref_name }} --pretty=format:'* %s (`%h`)')
+                    # Generate the Full Changelog URL for the first release
+                    FULL_CHANGELOG_URL="https://github.com/${{ github.repository }}/commits/${{ github.ref_name }}"
+                  else
+                    echo "Generating changelog from $PREVIOUS_TAG to ${{ github.ref_name }}"
+                    CHANGELOG=$(git log $PREVIOUS_TAG...${{ github.ref_name }} --pretty=format:'* %s (`%h`)')
+                    # Generate the Full Changelog URL for subsequent releases
+                    FULL_CHANGELOG_URL="https://github.com/${{ github.repository }}/compare/$PREVIOUS_TAG...${{ github.ref_name }}"
+                  fi
 
-          # Combine all parts into the final release body file
-          cat <<EOF > changelog.md
-          ### What's Changed
-          ${CHANGELOG}
+                  # Combine all parts into the final release body file
+                  cat <<EOF > changelog.md
+                  ### What's Changed
+                  ${CHANGELOG}
 
-          **Full Changelog**: ${FULL_CHANGELOG_URL}
-          EOF
+                  **Full Changelog**: ${FULL_CHANGELOG_URL}
+                  EOF
 
-          echo "changelog_path=changelog.md" >> $GITHUB_OUTPUT
+                  echo "changelog_path=changelog.md" >> $GITHUB_OUTPUT
 
-      - name: Create GitHub Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if [ -d "dist" ] && [ "$(ls -A dist)" ]; then
-            echo "Assets found. Creating release and uploading assets."
-            gh release create ${{ github.ref_name }} \
-              --title "${{ github.event.repository.name }} ${{ github.ref_name }}" \
-              --notes-file ${{ steps.generate_changelog.outputs.changelog_path }} \
-              dist/*
-          else
-            echo "No assets found. Creating release without assets."
-            gh release create ${{ github.ref_name }} \
-              --title "${{ github.event.repository.name }} ${{ github.ref_name }}" \
-              --notes-file ${{ steps.generate_changelog.outputs.changelog_path }}
-          fi
+            - name: Create GitHub Release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  if [ -d "dist" ] && [ "$(ls -A dist)" ]; then
+                    echo "Assets found. Creating release and uploading assets."
+                    gh release create ${{ github.ref_name }} \
+                      --title "${{ github.event.repository.name }} ${{ github.ref_name }}" \
+                      --notes-file ${{ steps.generate_changelog.outputs.changelog_path }} \
+                      dist/*
+                  else
+                    echo "No assets found. Creating release without assets."
+                    gh release create ${{ github.ref_name }} \
+                      --title "${{ github.event.repository.name }} ${{ github.ref_name }}" \
+                      --notes-file ${{ steps.generate_changelog.outputs.changelog_path }}
+                  fi
