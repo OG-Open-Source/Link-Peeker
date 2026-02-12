@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "Link Peeker",
-	"version": "3.4.2",
+	"version": "4.0.0",
 	"description": "__MSG_extensionDescription__",
 	"default_locale": "en",
 	"permissions": ["storage", "declarativeNetRequest"],
@@ -23,22 +23,16 @@
 		"open_in_tab": true
 	},
 	"icons": {
-		"16": "assets/icons/icon16.png",
-		"24": "assets/icons/icon24.png",
-		"32": "assets/icons/icon32.png",
-		"48": "assets/icons/icon48.png",
-		"128": "assets/icons/icon128.png",
-		"256": "assets/icons/icon256.png",
-		"512": "assets/icons/icon512.png",
-		"1024": "assets/icons/icon1024.png"
+		"16": "assets/icons/16.png",
+		"24": "assets/icons/24.png",
+		"32": "assets/icons/32.png",
+		"48": "assets/icons/48.png",
+		"128": "assets/icons/128.png",
+		"256": "assets/icons/256.png",
+		"512": "assets/icons/512.png",
+		"1024": "assets/icons/1024.png"
 	},
 	"content_security_policy": {
 		"extension_pages": "script-src 'self'; object-src 'self';"
-	},
-	"web_accessible_resources": [
-		{
-			"resources": ["assets/lib/gsap.min.js", "assets/lib/bulma.min.css", "assets/lib/lucide.min.js"],
-			"matches": ["<all_urls>"]
-		}
-	]
+	}
 }

@@ -89,7 +89,7 @@ Link Peeker features a robust theme system.
 ## Contributors
 
 <a href="https://github.com/OG-Open-Source/ Link-Peeker/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=OG-Open-Source/Link-Peeker" />
+  <img src="https://contrib.rocks/image?repo=OG-Open-Source/Link-Peeker"  alt="Contributor list and icons for the OG-Open-Source/Link-Peeker project"/>
 </a>
 
 ## Contributing
@@ -101,7 +101,18 @@ Link Peeker features a robust theme system.
 
 ## License
 
-This repository is licensed under the [MIT License](https://opensource.org/licenses/mit-license.php).
+### Primary Project License
+
+The main source code and documentation in this repository are licensed under the [MIT License](https://opensource.org/license/MIT).
+
+### Third-Party Components and Attributions
+
+This project utilizes external components or code whose copyright and licensing requirements must be separately adhered to:
+
+| Component Name                    | Source / Author | License Type | Location of License Document     | Hash Values                      |
+| :-------------------------------- | :-------------- | :----------- | :------------------------------- | -------------------------------- |
+| OG-Open-Source README.md Template | OG-Open-Source  | MIT          | /licenses/OG-Open-Source/LICENSE | 120aee1912f4c2c51937f4ea3c449954 |
+| Lucide Icons                      | Lucide          | ISC / MIT    | /licenses/Lucide/LICENSE         | f8c38c4d3b65c7a13fc277d8f5be91da |
 
 ---
 

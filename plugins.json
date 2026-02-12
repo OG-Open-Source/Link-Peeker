@@ -1,0 +1,26 @@
+[
+	{
+		"id": "youtube",
+		"name": "YouTube Enhancer",
+		"version": "1.0.0",
+		"author": "Link Peeker",
+		"license": "MIT",
+		"matches": ["(www\\.)?youtube\\.com/watch.*", "youtu\\.be/.*"],
+		"rules": {
+			"headersToRemove": ["X-Frame-Options", "Content-Security-Policy"],
+			"embedUrl": "https://www.youtube.com/embed/{id}?autoplay=1&rel=0&enablejsapi=1&origin={origin}",
+			"idRegex": "(?:v=|\\/)([a-zA-Z0-9_-]{11})"
+		}
+	},
+	{
+		"id": "github",
+		"name": "GitHub Preview",
+		"version": "1.0.1",
+		"author": "Link Peeker",
+		"license": "MIT",
+		"matches": ["github\\.com/.*"],
+		"rules": {
+			"headersToRemove": ["Content-Security-Policy", "frame-ancestors"]
+		}
+	}
+]

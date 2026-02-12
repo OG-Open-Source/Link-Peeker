@@ -80,11 +80,8 @@
 	"sb_allow_downloads": {
 		"message": "允许下载"
 	},
-	"sb_allow_downloads_without_user_activation": {
-		"message": "允许无用户激活的下载"
-	},
 	"sb_allow_storage_access_by_user_activation": {
-		"message": "允许用户激活时访问存储"
+		"message": "允许用户激活时访问保存"
 	},
 	"featurePolicyLabel": {
 		"message": "特性策略"
@@ -198,7 +195,7 @@
 		"message": "从 JSON 导入"
 	},
 	"blurEnabled": {
-		"message": "启用模糊"
+		"message": "激活模糊"
 	},
 	"blurAmount": {
 		"message": "模糊程度"
@@ -233,46 +230,8 @@
 	"deleteTheme": {
 		"message": "删除主题"
 	},
-	"customRulesTitle": {
-		"message": "自定义规则"
-	},
-	"domainLabel": {
-		"message": "域名"
-	},
 	"headersToRemoveLabel": {
 		"message": "要移除的标头"
-	},
-	"addRuleBtn": {
-		"message": "添加规则"
-	},
-	"activeRulesTitle": {
-		"message": "当前生效的自定义规则"
-	},
-	"domainHeader": {
-		"message": "域名"
-	},
-	"removedHeadersHeader": {
-		"message": "移除的标头"
-	},
-	"noCustomRules": {
-		"message": "没有定义自定义规则。"
-	},
-	"deleteRuleBtn": {
-		"message": "删除"
-	},
-	"error_select_header": {
-		"message": "请至少选择一个要移除的标头。"
-	},
-	"error_duplicate_rule": {
-		"message": "此域名的规则已存在。"
-	},
-	"confirm_delete_rule": {
-		"message": "您确定要删除 $domain$ 的规则吗？",
-		"placeholders": {
-			"domain": {
-				"content": "$1"
-			}
-		}
 	},
 	"navGeneral": {
 		"message": "通用设置"
@@ -280,16 +239,49 @@
 	"navAppearance": {
 		"message": "外观设置"
 	},
-	"navRules": {
-		"message": "规则设置"
-	},
 	"navAdvanced": {
 		"message": "高级设置"
+	},
+	"navPlugins": {
+		"message": "插件管理"
+	},
+	"pluginsTitle": {
+		"message": "插件系统"
+	},
+	"pluginName": {
+		"message": "名称"
+	},
+	"pluginVersion": {
+		"message": "版本"
+	},
+	"pluginAuthor": {
+		"message": "作者"
+	},
+	"pluginMatches": {
+		"message": "匹配规则 (Regex)"
+	},
+	"pluginRules": {
+		"message": "处理规则 (JSON)"
+	},
+	"addPluginBtn": {
+		"message": "添加插件"
+	},
+	"importPluginBtn": {
+		"message": "导入插件"
+	},
+	"importFromUrl": {
+		"message": "从 URL 导入"
+	},
+	"importFromClipboard": {
+		"message": "从剪贴板导入"
 	},
 	"openInNewTab": {
 		"message": "在新标签页中打开"
 	},
 	"closePreview": {
 		"message": "关闭"
+	},
+	"debugModeLabel": {
+		"message": "调试模式"
 	}
 }

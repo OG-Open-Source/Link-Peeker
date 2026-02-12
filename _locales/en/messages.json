@@ -80,9 +80,6 @@
 	"sb_allow_downloads": {
 		"message": "Allow Downloads"
 	},
-	"sb_allow_downloads_without_user_activation": {
-		"message": "Allow Downloads without User Activation"
-	},
 	"sb_allow_storage_access_by_user_activation": {
 		"message": "Allow Storage Access by User Activation"
 	},
@@ -233,46 +230,8 @@
 	"deleteTheme": {
 		"message": "Delete Theme"
 	},
-	"customRulesTitle": {
-		"message": "Custom Rules"
-	},
-	"domainLabel": {
-		"message": "Domain"
-	},
 	"headersToRemoveLabel": {
 		"message": "Headers to Remove"
-	},
-	"addRuleBtn": {
-		"message": "Add Rule"
-	},
-	"activeRulesTitle": {
-		"message": "Active Custom Rules"
-	},
-	"domainHeader": {
-		"message": "Domain"
-	},
-	"removedHeadersHeader": {
-		"message": "Removed Headers"
-	},
-	"noCustomRules": {
-		"message": "No custom rules defined."
-	},
-	"deleteRuleBtn": {
-		"message": "Delete"
-	},
-	"error_select_header": {
-		"message": "Please select at least one header to remove."
-	},
-	"error_duplicate_rule": {
-		"message": "A rule for this domain already exists."
-	},
-	"confirm_delete_rule": {
-		"message": "Are you sure you want to delete the rule for $domain$?",
-		"placeholders": {
-			"domain": {
-				"content": "$1"
-			}
-		}
 	},
 	"navGeneral": {
 		"message": "General"
@@ -280,16 +239,49 @@
 	"navAppearance": {
 		"message": "Appearance"
 	},
-	"navRules": {
-		"message": "Rules"
-	},
 	"navAdvanced": {
 		"message": "Advanced"
+	},
+	"navPlugins": {
+		"message": "Plugins"
+	},
+	"pluginsTitle": {
+		"message": "Plugin System"
+	},
+	"pluginName": {
+		"message": "Name"
+	},
+	"pluginVersion": {
+		"message": "Version"
+	},
+	"pluginAuthor": {
+		"message": "Author"
+	},
+	"pluginMatches": {
+		"message": "Matches (Regex)"
+	},
+	"pluginRules": {
+		"message": "Rules (JSON)"
+	},
+	"addPluginBtn": {
+		"message": "Add Plugin"
+	},
+	"importPluginBtn": {
+		"message": "Import Plugin"
+	},
+	"importFromUrl": {
+		"message": "Import from URL"
+	},
+	"importFromClipboard": {
+		"message": "Import from Clipboard"
 	},
 	"openInNewTab": {
 		"message": "Open in New Tab"
 	},
 	"closePreview": {
 		"message": "Close"
+	},
+	"debugModeLabel": {
+		"message": "Debug Mode"
 	}
 }

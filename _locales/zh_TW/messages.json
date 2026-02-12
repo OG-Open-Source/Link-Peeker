@@ -9,13 +9,13 @@
 		"message": "觸發鍵"
 	},
 	"triggerKeyAlt": {
-		"message": "Alt + 點擊"
+		"message": "Alt + 點選"
 	},
 	"triggerKeyCtrl": {
-		"message": "Ctrl + 點擊"
+		"message": "Ctrl + 點選"
 	},
 	"triggerKeyShift": {
-		"message": "Shift + 點擊"
+		"message": "Shift + 點選"
 	},
 	"themeLabel": {
 		"message": "主題"
@@ -33,7 +33,7 @@
 		"message": "English"
 	},
 	"langZhCn": {
-		"message": "简体中文"
+		"message": "簡體中文"
 	},
 	"langZhTw": {
 		"message": "繁體中文"
@@ -42,7 +42,7 @@
 		"message": "Iframe 設定"
 	},
 	"sandboxLabel": {
-		"message": "沙盒權限"
+		"message": "沙盒許可權"
 	},
 	"sb_allow_forms": {
 		"message": "允許表單"
@@ -69,7 +69,7 @@
 		"message": "允許同源"
 	},
 	"sb_allow_scripts": {
-		"message": "允許腳本"
+		"message": "允許指令碼"
 	},
 	"sb_allow_top_navigation": {
 		"message": "允許頂層導覽"
@@ -79,9 +79,6 @@
 	},
 	"sb_allow_downloads": {
 		"message": "允許下載"
-	},
-	"sb_allow_downloads_without_user_activation": {
-		"message": "允許無使用者啟動的下載"
 	},
 	"sb_allow_storage_access_by_user_activation": {
 		"message": "允許使用者啟動時存取儲存空間"
@@ -233,46 +230,8 @@
 	"deleteTheme": {
 		"message": "刪除主題"
 	},
-	"customRulesTitle": {
-		"message": "自訂規則"
-	},
-	"domainLabel": {
-		"message": "網域"
-	},
 	"headersToRemoveLabel": {
 		"message": "要移除的標頭"
-	},
-	"addRuleBtn": {
-		"message": "新增規則"
-	},
-	"activeRulesTitle": {
-		"message": "目前生效的自訂規則"
-	},
-	"domainHeader": {
-		"message": "網域"
-	},
-	"removedHeadersHeader": {
-		"message": "移除的標頭"
-	},
-	"noCustomRules": {
-		"message": "沒有定義自訂規則。"
-	},
-	"deleteRuleBtn": {
-		"message": "刪除"
-	},
-	"error_select_header": {
-		"message": "請至少選擇一個要移除的標頭。"
-	},
-	"error_duplicate_rule": {
-		"message": "此網域的規則已存在。"
-	},
-	"confirm_delete_rule": {
-		"message": "您確定要刪除 $domain$ 的規則嗎？",
-		"placeholders": {
-			"domain": {
-				"content": "$1"
-			}
-		}
 	},
 	"navGeneral": {
 		"message": "通用設定"
@@ -280,16 +239,49 @@
 	"navAppearance": {
 		"message": "外觀設定"
 	},
-	"navRules": {
-		"message": "規則設定"
-	},
 	"navAdvanced": {
 		"message": "進階設定"
+	},
+	"navPlugins": {
+		"message": "外掛管理"
+	},
+	"pluginsTitle": {
+		"message": "外掛系統"
+	},
+	"pluginName": {
+		"message": "名稱"
+	},
+	"pluginVersion": {
+		"message": "版本"
+	},
+	"pluginAuthor": {
+		"message": "作者"
+	},
+	"pluginMatches": {
+		"message": "匹配規則 (Regex)"
+	},
+	"pluginRules": {
+		"message": "處理規則 (JSON)"
+	},
+	"addPluginBtn": {
+		"message": "新增外掛"
+	},
+	"importPluginBtn": {
+		"message": "匯入外掛"
+	},
+	"importFromUrl": {
+		"message": "從 URL 匯入"
+	},
+	"importFromClipboard": {
+		"message": "從剪貼簿匯入"
 	},
 	"openInNewTab": {
 		"message": "在新分頁中開啟"
 	},
 	"closePreview": {
 		"message": "關閉"
+	},
+	"debugModeLabel": {
+		"message": "除錯模式"
 	}
 }
