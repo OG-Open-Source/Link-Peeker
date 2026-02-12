@@ -48,14 +48,14 @@ This project does not require any build steps or dependencies. You can load it d
 
 **Steps:**
 
-1.  **Clone or Download:** Get a local copy of this project's folder.
-2.  **Load the Extension in Your Browser:**
-    - Open your Chromium-based browser (e.g., Google Chrome, Microsoft Edge, Brave).
-    - Navigate to the extensions management page (usually `chrome://extensions`).
-    - Enable **"Developer mode"**.
-    - Click the **"Load unpacked"** button.
-    - Select the entire project folder (the one containing `manifest.json`).
-3.  **Done!** The Link Peeker extension should now be installed and active.
+1. **Clone or Download:** Get a local copy of this project's folder.
+2. **Load the Extension in Your Browser:**
+   - Open your Chromium-based browser (e.g., Google Chrome, Microsoft Edge, Brave).
+   - Navigate to the extensions management page (usually `chrome://extensions`).
+   - Enable **"Developer mode"**.
+   - Click the **"Load unpacked"** button.
+   - Select the entire project folder (the one containing `manifest.json`).
+3. **Done!** The Link Peeker extension should now be installed and active.
 
 ## Usage
 
