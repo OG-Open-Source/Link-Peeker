@@ -1,6 +1,6 @@
 {
-    "sonarlint.connectedMode.project": {
-        "connectionId": "og-open-source",
-        "projectKey": "OG-Open-Source_Link-Peeker"
-    }
+	"sonarlint.connectedMode.project": {
+		"connectionId": "og-open-source",
+		"projectKey": "OG-Open-Source_Link-Peeker"
+	}
 }
