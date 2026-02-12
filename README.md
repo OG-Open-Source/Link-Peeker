@@ -105,4 +105,4 @@ This repository is licensed under the [MIT License](https://opensource.org/licen
 
 ---
 
-© 2025 [OG-Open-Source](https://github.com/OG-Open-Source). All rights reserved.
+© 2026 [OG-Open-Source](https://github.com/OG-Open-Source). All rights reserved.
