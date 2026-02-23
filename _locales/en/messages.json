@@ -1,21 +1,30 @@
 {
 	"extensionDescription": {
-		"message": "Preview links without leaving your current page."
+		"message": "Preview links instantly without leaving your current page. Features native mode, UTM cleaning, and security blocking."
 	},
 	"settingsTitle": {
 		"message": "Link Peeker Settings"
 	},
+	"navPreferences": {
+		"message": "General"
+	},
+	"navAppearance": {
+		"message": "Appearance"
+	},
+	"navPermission": {
+		"message": "Security"
+	},
+	"navPlugins": {
+		"message": "Plugins"
+	},
+	"generalSettings": {
+		"message": "General Settings"
+	},
+	"languageLabel": {
+		"message": "Language"
+	},
 	"triggerKeyLabel": {
 		"message": "Trigger Key"
-	},
-	"triggerKeyAlt": {
-		"message": "Alt + Click"
-	},
-	"triggerKeyCtrl": {
-		"message": "Ctrl + Click"
-	},
-	"triggerKeyShift": {
-		"message": "Shift + Click"
 	},
 	"themeLabel": {
 		"message": "Theme"
@@ -26,262 +35,13 @@
 	"themeDark": {
 		"message": "Dark"
 	},
-	"languageLabel": {
-		"message": "Language"
-	},
-	"langEn": {
-		"message": "English"
-	},
-	"langZhCn": {
-		"message": "简体中文"
-	},
-	"langZhTw": {
-		"message": "繁體中文"
-	},
-	"iframeConfigTitle": {
-		"message": "Iframe Configuration"
-	},
-	"sandboxLabel": {
-		"message": "Sandbox Permissions"
-	},
-	"sb_allow_forms": {
-		"message": "Allow Forms"
-	},
-	"sb_allow_modals": {
-		"message": "Allow Modals"
-	},
-	"sb_allow_orientation_lock": {
-		"message": "Allow Orientation Lock"
-	},
-	"sb_allow_pointer_lock": {
-		"message": "Allow Pointer Lock"
-	},
-	"sb_allow_popups": {
-		"message": "Allow Popups"
-	},
-	"sb_allow_popups_to_escape_sandbox": {
-		"message": "Allow Popups to Escape Sandbox"
-	},
-	"sb_allow_presentation": {
-		"message": "Allow Presentation"
-	},
-	"sb_allow_same_origin": {
-		"message": "Allow Same-Origin"
-	},
-	"sb_allow_scripts": {
-		"message": "Allow Scripts"
-	},
-	"sb_allow_top_navigation": {
-		"message": "Allow Top Navigation"
-	},
-	"sb_allow_top_navigation_by_user_activation": {
-		"message": "Allow Top Navigation by User Activation"
-	},
-	"sb_allow_downloads": {
-		"message": "Allow Downloads"
-	},
-	"sb_allow_storage_access_by_user_activation": {
-		"message": "Allow Storage Access by User Activation"
-	},
-	"featurePolicyLabel": {
-		"message": "Feature Policy"
-	},
-	"fp_autoplay": {
-		"message": "Autoplay"
-	},
-	"fp_camera": {
-		"message": "Camera"
-	},
-	"fp_clipboard_write": {
-		"message": "Clipboard Write"
-	},
-	"fp_display_capture": {
-		"message": "Display Capture"
-	},
-	"fp_encrypted_media": {
-		"message": "Encrypted Media"
-	},
-	"fp_fullscreen": {
-		"message": "Fullscreen"
-	},
-	"fp_geolocation": {
-		"message": "Geolocation"
-	},
-	"fp_microphone": {
-		"message": "Microphone"
-	},
-	"fp_payment": {
-		"message": "Payment"
-	},
-	"fp_screen_wake_lock": {
-		"message": "Screen Wake Lock"
-	},
-	"fp_web_share": {
-		"message": "Web Share"
-	},
-	"referrerPolicyLabel": {
-		"message": "Referrer Policy"
-	},
-	"rp_no_referrer": {
-		"message": "No Referrer"
-	},
-	"rp_no_referrer_when_downgrade": {
-		"message": "No Referrer When Downgrade"
-	},
-	"rp_origin": {
-		"message": "Origin"
-	},
-	"rp_origin_when_cross_origin": {
-		"message": "Origin When Cross-Origin"
-	},
-	"rp_same_origin": {
-		"message": "Same Origin"
-	},
-	"rp_strict_origin": {
-		"message": "Strict Origin"
-	},
-	"rp_strict_origin_when_cross_origin": {
-		"message": "Strict Origin When Cross-Origin"
-	},
-	"rp_unsafe_url": {
-		"message": "Unsafe URL"
-	},
-	"statusResolving": {
-		"message": "Resolving URL..."
-	},
-	"statusLoading": {
-		"message": "Loading: $url$",
-		"placeholders": {
-			"url": {
-				"content": "$1"
-			}
-		}
-	},
-	"errorUnableToLoad": {
-		"message": "Unable to load page. The destination may be unreachable or has blocked viewing in an iframe."
-	},
-	"errorResolving": {
-		"message": "Error resolving URL: $error$",
-		"placeholders": {
-			"error": {
-				"content": "$1"
-			}
-		}
-	},
-	"errorBlocked": {
-		"message": "The page at $url$ cannot be displayed because its security policy (X-Frame-Options or Content-Security-Policy) prevents it from being embedded.",
-		"placeholders": {
-			"url": {
-				"content": "$1"
-			}
-		}
-	},
-	"errorTimeout": {
-		"message": "The request timed out. The page might be loading too slowly or is unresponsive."
-	},
-	"themeCustomizationTitle": {
-		"message": "Theme Customization"
-	},
-	"addNewTheme": {
-		"message": "Add New Theme"
-	},
-	"themeName": {
-		"message": "Theme Name"
-	},
-	"saveTheme": {
-		"message": "Save Theme"
-	},
-	"importTheme": {
-		"message": "Import from JSON"
-	},
-	"blurEnabled": {
-		"message": "Enable Blur"
-	},
-	"blurAmount": {
-		"message": "Blur Amount"
-	},
-	"boxBgColor": {
-		"message": "Box Background"
-	},
-	"borderColor": {
-		"message": "Border Color"
-	},
-	"buttonBgColor": {
-		"message": "Button Background"
-	},
-	"buttonHoverBgColor": {
-		"message": "Button Hover Background"
-	},
-	"primaryTextColor": {
-		"message": "Primary Text Color"
-	},
-	"secondaryTextColor": {
-		"message": "Secondary Text Color"
-	},
-	"errorColor": {
-		"message": "Error Color"
-	},
-	"cancel": {
-		"message": "Cancel"
-	},
-	"exportTheme": {
-		"message": "Export to JSON"
-	},
-	"deleteTheme": {
-		"message": "Delete Theme"
-	},
-	"headersToRemoveLabel": {
-		"message": "Headers to Remove"
-	},
-	"navGeneral": {
-		"message": "General"
-	},
-	"navAppearance": {
-		"message": "Appearance"
-	},
-	"navAdvanced": {
-		"message": "Advanced"
-	},
-	"navPlugins": {
-		"message": "Plugins"
-	},
-	"pluginsTitle": {
-		"message": "Plugin System"
-	},
-	"pluginName": {
-		"message": "Name"
-	},
-	"pluginVersion": {
-		"message": "Version"
-	},
-	"pluginAuthor": {
-		"message": "Author"
-	},
-	"pluginMatches": {
-		"message": "Matches (Regex)"
-	},
-	"pluginRules": {
-		"message": "Rules (JSON)"
-	},
-	"addPluginBtn": {
-		"message": "Add Plugin"
-	},
-	"importPluginBtn": {
-		"message": "Import Plugin"
-	},
-	"importFromUrl": {
-		"message": "Import from URL"
-	},
-	"importFromClipboard": {
-		"message": "Import from Clipboard"
+	"themeAuto": {
+		"message": "Auto"
 	},
 	"openInNewTab": {
 		"message": "Open in New Tab"
 	},
 	"closePreview": {
 		"message": "Close"
-	},
-	"debugModeLabel": {
-		"message": "Debug Mode"
 	}
 }
